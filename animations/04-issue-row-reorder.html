@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>04 Issue row → reorder</title>
+<style>
+  /* Tokens copied verbatim from ../style/tokens.css (Linear motion study).
+     Unofficial design study. Not affiliated with Linear. */
+  :root{
+    --color-bg-marketing:#010102;
+    --color-bg-level-1:#0f1011;
+    --color-bg-level-2:#141516;
+    --color-fg-quaternary:#62666d;
+    --color-accent:#7170ff;
+    --color-plan:#68cc58; --color-build:#d4b144; --color-blue:#4ea7fc;
+    --color-orange:#fc7840; --color-security:#7a7fad;
+  }
+  html,body{margin:0;height:100%;background:var(--color-bg-marketing);overflow:hidden}
+  body{display:grid;place-items:center}
+  canvas{width:min(100vw,80vh);height:auto;display:block}
+</style>
+</head>
+<body>
+<canvas id="c" width="1080" height="1350"></canvas>
+<script>
+/* ---------- harness ---------- */
+const W = 1080, H = 1350, T = 5000;
+function bez(x1,y1,x2,y2){
+  const cx=3*x1, bx=3*(x2-x1)-cx, ax=1-cx-bx;
+  const cy=3*y1, by=3*(y2-y1)-cy, ay=1-cy-by;
+  const fx=u=>((ax*u+bx)*u+cx)*u, dfx=u=>(3*ax*u+2*bx)*u+cx;
+  return x=>{ if(x<=0)return 0; if(x>=1)return 1; let u=x;
+    for(let i=0;i<8;i++){const e=fx(u)-x; if(Math.abs(e)<1e-6)break; const d=dfx(u); if(Math.abs(d)<1e-6)break; u-=e/d;}
+    return ((ay*u+by)*u+cy)*u; };
+}
+const E = { outQuad:bez(.25,.46,.45,.94), snap:bez(.32,.72,0,1) };
+const cl = (v,a=0,b=1)=>v<a?a:v>b?b:v;
+const seg = (t,a,b)=>cl((t-a)/(b-a));
+const hash = i => { const x = Math.sin(i*127.1 + 311.7) * 43758.5453; return x - Math.floor(x); };
+const ctx = document.getElementById('c').getContext('2d');
+
+/* ---------- the object: six rows of a list ---------- */
+const ROW_H = 112, GAP = 14, SLOTS = 6;
+const RW = 804, RX = (W - RW)/2;
+const TOTAL = SLOTS*ROW_H + (SLOTS-1)*GAP;
+const Y0 = (H - TOTAL)/2;                       /* 315 — inside the square-safe band */
+const slotY = s => Y0 + s*(ROW_H + GAP);
+
+const HUES = ['#68cc58','#d4b144','#4ea7fc','#fc7840','#7a7fad','#68cc58'];
+const rows = Array.from({length:SLOTS}, (_,i) => ({
+  title: 300 + Math.round(hash(i)*290),         /* redacted content: no text */
+  sub:   150 + Math.round(hash(i+41)*140),
+  chip:  78  + Math.round(hash(i+77)*44),
+  hue:   HUES[i],
+}));
+
+const MOVER = 4, DEST = 1;                      /* travels up three slots, and back */
+
+/* ---------- the change: one row's position ---------- */
+function moverSlot(t){
+  if (t < 400)  return MOVER;
+  if (t < 1100) return MOVER + (DEST-MOVER)*E.snap(seg(t,400,1100));   /* 700ms travel */
+  if (t < 2400) return DEST;
+  if (t < 3100) return DEST + (MOVER-DEST)*E.snap(seg(t,2400,3100));   /* 700ms back   */
+  return MOVER;
+}
+/* lift: 200ms up, 200ms down — scale 1 → 1.01, the native lift */
+function liftAmount(t){
+  if (t < 200)  return E.outQuad(seg(t,0,200)) * 0;      /* resting at the seam */
+  if (t < 400)  return E.outQuad(seg(t,200,400));
+  if (t < 3100) return 1;
+  if (t < 3300) return 1 - E.outQuad(seg(t,3100,3300));
+  return 0;
+}
+
+function roundRect(x,y,w,h,r){
+  r = Math.min(r, w/2, h/2);        /* --radius-rounded is 9999px; arcTo needs it clamped */
+  ctx.beginPath();
+  ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r);
+  ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath();
+}
+
+function drawRow(r, y, lift, accent){
+  const s = 1 + 0.010*lift;                      /* scale(1.01) — nothing travels far */
+  const cx = RX + RW/2, cy = y + ROW_H/2;
+  ctx.save();
+  ctx.translate(cx,cy); ctx.scale(s,s); ctx.translate(-cx,-cy);
+
+  /* --shadow-halo: a black bloom, not a drop shadow */
+  if (lift > 0.001){
+    ctx.save();
+    ctx.shadowColor = `rgba(8,9,10,${0.95*lift})`;
+    ctx.shadowBlur = 69*lift; ctx.shadowOffsetY = 13*lift;
+    ctx.fillStyle = '#0f1011';
+    roundRect(RX,y,RW,ROW_H,12); ctx.fill();
+    ctx.restore();
+  }
+
+  /* surface */
+  ctx.fillStyle = lift > 0.5 ? '#141516' : '#0f1011';
+  roundRect(RX,y,RW,ROW_H,12); ctx.fill();
+
+  /* --inset-topline: a 1px bevel catching light from above */
+  ctx.strokeStyle = `rgba(255,255,255,${0.04 + 0.03*lift})`;
+  ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(RX+12, y+0.5); ctx.lineTo(RX+RW-12, y+0.5); ctx.stroke();
+
+  /* the rule: 1px rgba(255,255,255,0.08) */
+  ctx.strokeStyle = `rgba(255,255,255,${0.08 + 0.04*lift})`;
+  roundRect(RX+0.5,y+0.5,RW-1,ROW_H-1,12); ctx.stroke();
+
+  /* status mark */
+  const gx = RX + 46, gy = y + ROW_H/2;
+  ctx.strokeStyle = accent ? '#7170ff' : r.hue;
+  ctx.globalAlpha = accent ? 1 : 0.5;
+  ctx.lineWidth = 2.5;
+  ctx.beginPath(); ctx.arc(gx,gy,15,0,6.283185307); ctx.stroke();
+  if (accent){
+    ctx.fillStyle = '#7170ff';
+    ctx.beginPath(); ctx.arc(gx,gy,7.5,0,6.283185307); ctx.fill();
+  }
+  ctx.globalAlpha = 1;
+
+  /* redacted content — bars, never letterforms */
+  ctx.fillStyle = accent ? 'rgba(247,248,248,0.82)' : 'rgba(98,102,109,0.95)';
+  roundRect(RX+88, y+36, r.title, 12, 6); ctx.fill();
+  ctx.fillStyle = 'rgba(98,102,109,0.45)';
+  roundRect(RX+88, y+64, r.sub, 9, 4.5); ctx.fill();
+
+  /* chip — pill radius, 5% white, hairline */
+  const chx = RX + RW - 44 - r.chip, chy = y + ROW_H/2 - 15;
+  ctx.fillStyle = 'rgba(255,255,255,0.05)';
+  roundRect(chx, chy, r.chip, 30, 9999); ctx.fill();
+  ctx.strokeStyle = 'rgba(255,255,255,0.08)';
+  ctx.lineWidth = 1;
+  roundRect(chx+0.5, chy+0.5, r.chip-1, 29, 9999); ctx.stroke();
+
+  ctx.restore();
+}
+
+function draw(t){
+  ctx.fillStyle = '#010102';
+  ctx.fillRect(0,0,W,H);
+
+  const ms = moverSlot(t), lift = liftAmount(t);
+
+  /* the others part to make room — a consequence, not a second change.
+     s = clamp(rank - moverSlot + 1, 0, 1) inherits the mover's easing. */
+  const others = [0,1,2,3,5];
+  others.forEach((orig, rank) => {
+    const shift = cl(rank - ms + 1);
+    drawRow(rows[orig], slotY(rank + shift), 0, false);
+  });
+
+  /* the mover last, on top, carrying the only accent in the frame */
+  drawRow(rows[MOVER], slotY(ms), lift, true);
+
+  /* edge scrim */
+  const v = ctx.createLinearGradient(0,0,0,H);
+  v.addColorStop(0,'rgba(1,1,2,0.92)');
+  v.addColorStop(0.18,'rgba(1,1,2,0)');
+  v.addColorStop(0.82,'rgba(1,1,2,0)');
+  v.addColorStop(1,'rgba(1,1,2,0.92)');
+  ctx.fillStyle = v; ctx.fillRect(0,0,W,H);
+}
+
+window.LOOP = T;
+window.seek = ms => draw(((ms % T) + T) % T);
+if (location.search.includes('capture')) { draw(0); }
+else { const run = () => { draw(performance.now() % T); requestAnimationFrame(run); }; requestAnimationFrame(run); }
+</script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>07 Accent → bloom</title>
+<style>
+  /* Tokens copied verbatim from ../style/tokens.css (Linear motion study).
+     Unofficial design study. Not affiliated with Linear. */
+  :root{
+    --color-bg-marketing:#010102;
+    --color-accent:#7170ff;
+    --color-indigo:#5e6ad2;
+    --color-border-translucent-strong:#ffffff14;
+  }
+  html,body{margin:0;height:100%;background:var(--color-bg-marketing);overflow:hidden}
+  body{display:grid;place-items:center}
+  canvas{width:min(100vw,80vh);height:auto;display:block}
+</style>
+</head>
+<body>
+<canvas id="c" width="1080" height="1350"></canvas>
+<script>
+/* ---------- harness ---------- */
+const W = 1080, H = 1350, T = 5000;
+const TAU = Math.PI*2;
+const ctx = document.getElementById('c').getContext('2d');
+const hash = i => { const x = Math.sin(i*127.1 + 311.7) * 43758.5453; return x - Math.floor(x); };
+const GIF_MODE = location.search.includes('gif=1');
+
+/* ---------- dither tile ----------
+   At 1080px a 20%-alpha ramp bands badly once LinkedIn re-encodes it.
+   A deterministic 1px noise tile, built once, kills the banding.     */
+const NOISE = (() => {
+  const n = document.createElement('canvas'); n.width = n.height = 160;
+  const g = n.getContext('2d'), d = g.createImageData(160,160);
+  for(let i=0;i<160*160;i++){
+    const v = Math.floor(hash(i*0.613) * 255);
+    d.data[i*4] = d.data[i*4+1] = d.data[i*4+2] = v;
+    d.data[i*4+3] = 10;                        /* ~4% — just enough to dither */
+  }
+  g.putImageData(d,0,0);
+  return n;
+})();
+const NOISE_PATTERN = ctx.createPattern(NOISE, 'repeat');
+
+/* ---------- the object: one bloom, in three lobes ----------
+   All three are the same colour family (accent → indigo), so the
+   frame still carries a single accent. Max alpha 0.20, per the
+   gradient law — colour is a bloom, never a full-bleed ramp.        */
+const LOBES = [
+  { r:560, a:0.200, col:'113,112,255', cx:[ 300, 0.0], cy:[ 250, 0.0] },
+  { r:420, a:0.135, col:'94,106,210',  cx:[-260, 0.5], cy:[ 310, 0.25] },
+  { r:300, a:0.095, col:'130,143,255', cx:[ 190, 0.75], cy:[-270, 0.5] },
+];
+
+/* The static architecture the bloom passes behind: a sparse rule grid
+   at 8% white — the single most-used border value on linear.app — with
+   a node at each crossing. The structure stays still; only light moves. */
+const RULES_Y = [340, 475, 610, 745, 880, 1015];
+const RULES_X = [150, 390, 690, 930];
+
+function draw(t){
+  const p = t/T;                                 /* one turn per loop — seamless */
+
+  ctx.fillStyle = '#010102';
+  ctx.fillRect(0,0,W,H);
+
+  /* the change: the bloom's position. Lissajous on a single period. */
+  ctx.globalCompositeOperation = 'lighter';
+  for(const L of LOBES){
+    const ax = (p + L.cx[1]) * TAU, ay = (p + L.cy[1]) * TAU;
+    const x = W/2 + L.cx[0] * Math.cos(ax);
+    const y = H/2 + L.cy[0] * Math.sin(ay);
+    /* breathe the radius on the same period so nothing drifts out of phase */
+    const r = L.r * (1 + 0.10 * Math.sin((p + 0.33) * TAU));
+    const g = ctx.createRadialGradient(x,y,0,x,y,r);
+    g.addColorStop(0,    `rgba(${L.col},${L.a})`);
+    g.addColorStop(0.45, `rgba(${L.col},${L.a*0.42})`);
+    g.addColorStop(1,    `rgba(${L.col},0)`);
+    ctx.fillStyle = g; ctx.fillRect(0,0,W,H);
+  }
+  ctx.globalCompositeOperation = 'source-over';
+
+  /* the rule grid — still, while the light moves behind it */
+  ctx.lineWidth = 1;
+  ctx.strokeStyle = 'rgba(255,255,255,0.16)';
+  for(const y of RULES_Y){
+    ctx.beginPath(); ctx.moveTo(RULES_X[0], y+0.5); ctx.lineTo(RULES_X[RULES_X.length-1], y+0.5); ctx.stroke();
+  }
+  ctx.strokeStyle = 'rgba(255,255,255,0.11)';
+  for(const x of RULES_X){
+    ctx.beginPath(); ctx.moveTo(x+0.5, RULES_Y[0]); ctx.lineTo(x+0.5, RULES_Y[RULES_Y.length-1]); ctx.stroke();
+  }
+  /* a node at each crossing — 0.3 opacity, the resting dot state */
+  ctx.globalAlpha = 0.30;
+  ctx.fillStyle = '#8a8f98';
+  for(const y of RULES_Y) for(const x of RULES_X){
+    ctx.beginPath(); ctx.arc(x, y, 3.2, 0, TAU); ctx.fill();
+  }
+  ctx.globalAlpha = 1;
+
+  /* Dither over everything that is a gradient. GIF palettisation does its
+     own bayer dithering and treats per-pixel grain as pure entropy, so the
+     ?gif=1 capture skips this pass — same image, a third of the file.     */
+  if (!GIF_MODE){
+    ctx.globalAlpha = 0.5;
+    ctx.fillStyle = NOISE_PATTERN;
+    ctx.fillRect(0,0,W,H);
+    ctx.globalAlpha = 1;
+  }
+
+  /* --grad-scrim-bottom + top fade: the field falls into the frame */
+  const v = ctx.createLinearGradient(0,0,0,H);
+  v.addColorStop(0,'rgba(1,1,2,0.86)');
+  v.addColorStop(0.26,'rgba(1,1,2,0)');
+  v.addColorStop(0.76,'rgba(1,1,2,0)');
+  v.addColorStop(1,'rgba(1,1,2,0.86)');
+  ctx.fillStyle = v; ctx.fillRect(0,0,W,H);
+
+  const rv = ctx.createRadialGradient(W/2,H/2,380,W/2,H/2,880);
+  rv.addColorStop(0,'rgba(1,1,2,0)');
+  rv.addColorStop(1,'rgba(1,1,2,0.55)');
+  ctx.fillStyle = rv; ctx.fillRect(0,0,W,H);
+}
+
+window.LOOP = T;
+window.seek = ms => draw(((ms % T) + T) % T);
+if (location.search.includes('capture')) { draw(0); }
+else { const run = () => { draw(performance.now() % T); requestAnimationFrame(run); }; requestAnimationFrame(run); }
+</script>
+</body>
+</html>

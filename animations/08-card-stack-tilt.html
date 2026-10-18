@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>08 Card stack → tilt</title>
+<style>
+  /* Tokens copied verbatim from ../style/tokens.css (Linear motion study).
+     Unofficial design study. Not affiliated with Linear. */
+  :root{
+    --color-bg-marketing:#010102;
+    --color-bg-level-1:#0f1011;
+    --color-bg-level-2:#141516;
+    --color-bg-level-3:#191a1b;
+    --color-fg-quaternary:#62666d;
+    --color-accent:#7170ff;
+    --color-plan:#68cc58;
+    --radius-16:16px;
+    --radius-8:8px;
+    --radius-rounded:9999px;
+    --border-rule:1px solid rgba(255,255,255,0.08);
+    --shadow-halo:0px 8.576px 12.863px #08090a, 0px 0px 68.604px #08090a;
+    --inset-topline:inset 0 1px 0 0 rgba(255,255,255,0.04);
+    --blur-soft:4px;
+  }
+  html,body{margin:0;height:100%;background:var(--color-bg-marketing);overflow:hidden}
+  body{display:grid;place-items:center}
+
+  #stage{
+    width:1080px;height:1350px;position:relative;overflow:hidden;
+    background:var(--color-bg-marketing);
+    transform-origin:center center;
+  }
+  /* scale the 1080×1350 stage to fit the viewport without touching its geometry */
+  #fit{width:min(100vw,80vh);aspect-ratio:1080/1350;position:relative;overflow:hidden}
+  #fit > #stage{position:absolute;top:0;left:0;transform:scale(var(--fit))}
+
+  #scene{position:absolute;inset:0;perspective:1500px;perspective-origin:50% 42%}
+  #plane{position:absolute;inset:0;transform-style:preserve-3d;will-change:transform}
+
+  .card{
+    position:absolute;left:50%;top:50%;
+    width:760px;height:470px;margin:-235px 0 0 -380px;
+    background:var(--color-bg-level-1);
+    border:var(--border-rule);
+    border-radius:var(--radius-16);
+    box-shadow:var(--shadow-halo), var(--inset-topline);
+    transform-style:preserve-3d;
+    will-change:transform,filter;
+  }
+  .card::after{ /* 2% white lift — the universal surface wash */
+    content:'';position:absolute;inset:0;border-radius:inherit;
+    background:linear-gradient(rgba(255,255,255,0.02),rgba(255,255,255,0.02));
+    pointer-events:none;
+  }
+  .hdr{position:absolute;left:0;right:0;top:0;height:64px;border-bottom:var(--border-rule)}
+  .bar{position:absolute;border-radius:var(--radius-rounded);background:var(--color-fg-quaternary)}
+  .tile{position:absolute;border-radius:var(--radius-8);background:rgba(255,255,255,0.05);border:var(--border-rule)}
+  .dot{position:absolute;width:18px;height:18px;border-radius:50%;border:2.5px solid var(--color-fg-quaternary)}
+  .dot.on{border-color:var(--color-accent);background:rgba(113,112,255,0.9)}
+
+  /* depth of field, fixed per plane — the /plan hero's treatment */
+  #c-far{filter:blur(7px) brightness(0.52)}
+  #c-mid{filter:blur(0px) brightness(1)}
+  #c-near{filter:blur(4.5px) brightness(0.72)}
+
+  #bloom{position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(58% 42% at 50% 44%, rgba(113,112,255,0.17) 0%, rgba(113,112,255,0) 100%)}
+  #scrim{position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(60% 46% at 50% 44%, rgba(1,1,2,0) 0%, rgba(1,1,2,0.72) 100%),
+      linear-gradient(rgba(1,1,2,0.92) 0%, rgba(1,1,2,0) 20%, rgba(1,1,2,0) 80%, rgba(1,1,2,0.92) 100%)}
+</style>
+</head>
+<body>
+<div id="fit"><div id="stage">
+  <div id="scene">
+    <div id="plane">
+      <div class="card" id="c-far"></div>
+      <div class="card" id="c-mid"></div>
+      <div class="card" id="c-near"></div>
+    </div>
+  </div>
+  <div id="bloom"></div>
+  <div id="scrim"></div>
+</div></div>
+
+<script>
+const W = 1080, H = 1350, T = 5000, TAU = Math.PI*2;
+const hash = i => { const x = Math.sin(i*127.1 + 311.7) * 43758.5453; return x - Math.floor(x); };
+
+/* fit the fixed 1080×1350 stage into whatever box the viewer has */
+const fit = document.getElementById('fit');
+const applyFit = () => document.getElementById('stage')
+  .style.setProperty('--fit', (fit.clientWidth / W).toString());
+new ResizeObserver(applyFit).observe(fit); applyFit();
+
+/* ---------- the object: three abstract surfaces on one plane ----------
+   Redacted content only: bars, tiles and status marks. No text,
+   no logo, no wordmark.                                              */
+function fill(card, seed, accentRow){
+  const h = document.createElement('div'); h.className = 'hdr'; card.appendChild(h);
+
+  const add = (cls, css) => { const d = document.createElement('div'); d.className = cls;
+    Object.assign(d.style, css); card.appendChild(d); return d; };
+
+  add('bar', { left:'32px', top:'26px', width:'190px', height:'12px' });
+  add('tile',{ right:'32px', top:'20px', width:'96px', height:'24px', borderRadius:'9999px' });
+
+  for(let i=0;i<5;i++){
+    const y = 96 + i*72;
+    const w = 210 + Math.round(hash(seed + i*3.3) * 330);
+    const d = add('dot', { left:'34px', top:(y+6)+'px' });
+    if (i === accentRow) d.classList.add('on');
+    add('bar', { left:'74px', top:(y+10)+'px', width:w+'px', height:'11px',
+                 opacity: i === accentRow ? '0.95' : '0.6',
+                 background: i === accentRow ? '#f7f8f8' : '' });
+    add('bar', { left:'74px', top:(y+32)+'px', width:Math.round(w*0.46)+'px', height:'8px', opacity:'0.32' });
+    add('tile',{ right:'32px', top:(y+4)+'px', width:(70 + Math.round(hash(seed+i*7.7)*52))+'px', height:'26px', borderRadius:'9999px' });
+  }
+}
+fill(document.getElementById('c-far'),  11.0, -1);
+fill(document.getElementById('c-mid'),  47.0,  2);
+fill(document.getElementById('c-near'), 83.0, -1);
+
+const plane = document.getElementById('plane');
+const far  = document.getElementById('c-far');
+const mid  = document.getElementById('c-mid');
+const near = document.getElementById('c-near');
+
+/* ---------- the change: the plane's tilt ----------
+   One period per loop on every axis, so draw(0) === draw(T).
+   Amplitudes are small — ±3.5° — because this brand does not
+   move things far; the parallax does the work.                   */
+function draw(t){
+  const p = t/T, a = p*TAU;
+
+  const rx = -21 + 3.5*Math.sin(a);
+  const ry =   8 + 3.0*Math.cos(a);
+  const rz = -13 + 2.2*Math.sin(a + 1.1);
+  const ty =  10 * Math.sin(a + 0.6);
+
+  plane.style.transform =
+    `translateY(${ty.toFixed(3)}px) rotateX(${rx.toFixed(3)}deg) rotateY(${ry.toFixed(3)}deg) rotateZ(${rz.toFixed(3)}deg)`;
+
+  /* each plane sits at its own depth, so the tilt separates them */
+  far.style.transform  = `translate3d(-210px, -330px, -420px)`;
+  mid.style.transform  = `translate3d(   0px,    0px,    0px)`;
+  near.style.transform = `translate3d( 230px,  350px,  300px)`;
+}
+
+window.LOOP = T;
+window.seek = ms => draw(((ms % T) + T) % T);
+if (location.search.includes('capture')) { draw(0); }
+else { const run = () => { draw(performance.now() % T); requestAnimationFrame(run); }; requestAnimationFrame(run); }
+</script>
+</body>
+</html>

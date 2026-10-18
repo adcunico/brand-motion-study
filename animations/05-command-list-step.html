@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>05 Command list → step</title>
+<style>
+  /* Tokens copied verbatim from ../style/tokens.css (Linear motion study).
+     Unofficial design study. Not affiliated with Linear. */
+  :root{
+    --color-bg-marketing:#010102;
+    --color-bg-level-1:#0f1011;
+    --color-bg-level-2:#141516;
+    --color-fg-primary:#f7f8f8;
+    --color-fg-quaternary:#62666d;
+    --color-accent:#7170ff;
+    --color-accent-tint:#18182f;
+    --speed-quick:100ms;
+  }
+  html,body{margin:0;height:100%;background:var(--color-bg-marketing);overflow:hidden}
+  body{display:grid;place-items:center}
+  canvas{width:min(100vw,80vh);height:auto;display:block}
+</style>
+</head>
+<body>
+<canvas id="c" width="1080" height="1350"></canvas>
+<script>
+/* ---------- harness ---------- */
+const W = 1080, H = 1350, T = 5000;
+function bez(x1,y1,x2,y2){
+  const cx=3*x1, bx=3*(x2-x1)-cx, ax=1-cx-bx;
+  const cy=3*y1, by=3*(y2-y1)-cy, ay=1-cy-by;
+  const fx=u=>((ax*u+bx)*u+cx)*u, dfx=u=>(3*ax*u+2*bx)*u+cx;
+  return x=>{ if(x<=0)return 0; if(x>=1)return 1; let u=x;
+    for(let i=0;i<8;i++){const e=fx(u)-x; if(Math.abs(e)<1e-6)break; const d=dfx(u); if(Math.abs(d)<1e-6)break; u-=e/d;}
+    return ((ay*u+by)*u+cy)*u; };
+}
+const E = { outQuad:bez(.25,.46,.45,.94), outCubic:bez(.215,.61,.355,1) };
+const cl = (v,a=0,b=1)=>v<a?a:v>b?b:v;
+const hash = i => { const x = Math.sin(i*127.1 + 311.7) * 43758.5453; return x - Math.floor(x); };
+const ctx = document.getElementById('c').getContext('2d');
+
+function roundRect(x,y,w,h,r){
+  r = Math.min(r, w/2, h/2);        /* --radius-rounded is 9999px; arcTo needs it clamped */
+  ctx.beginPath();
+  ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r);
+  ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath();
+}
+
+/* ---------- the object: a command panel ---------- */
+const PW = 760, PH = 616;
+const PX = (W-PW)/2, PY = (H-PH)/2;             /* 160, 367 — square-safe */
+const INPUT_H = 96, ROW_H = 80, ROWS = 6, PAD = 16;
+const LIST_Y = PY + INPUT_H + 8;
+const rowY = i => LIST_Y + PAD + i*ROW_H;
+
+const items = Array.from({length:ROWS}, (_,i) => ({
+  title: 210 + Math.round(hash(i*3.7)*230),
+  meta:  34 + Math.round(hash(i+19)*30),
+}));
+
+/* ---------- the change: which row is selected ----------
+   Six beats across the bar; the selection cuts instantly and the
+   colour settles over 100ms — Linear's own quickTransition.      */
+const BEAT = T/ROWS;                             /* 833.33ms */
+const CARET_PERIOD = 1250;                       /* 4 blinks per loop, steps(1) */
+
+function draw(t){
+  ctx.fillStyle = '#010102';
+  ctx.fillRect(0,0,W,H);
+
+  const sel = Math.floor(t/BEAT) % ROWS;
+  const u = (t - sel*BEAT);
+  const settle = E.outQuad(cl(u/100));           /* --speed-quickTransition */
+
+  /* panel bloom — the surface sits in its own light */
+  const bl = ctx.createRadialGradient(W/2,H/2,0,W/2,H/2,620);
+  bl.addColorStop(0,'rgba(113,112,255,0.055)');
+  bl.addColorStop(1,'rgba(113,112,255,0)');
+  ctx.fillStyle = bl; ctx.fillRect(0,0,W,H);
+
+  /* --shadow-halo */
+  ctx.save();
+  ctx.shadowColor = 'rgba(8,9,10,0.95)';
+  ctx.shadowBlur = 69; ctx.shadowOffsetY = 13;
+  ctx.fillStyle = '#0f1011';
+  roundRect(PX,PY,PW,PH,16); ctx.fill();
+  ctx.restore();
+
+  /* surface + 2% white lift */
+  ctx.fillStyle = '#0f1011';
+  roundRect(PX,PY,PW,PH,16); ctx.fill();
+  ctx.fillStyle = 'rgba(255,255,255,0.02)';
+  roundRect(PX,PY,PW,PH,16); ctx.fill();
+
+  ctx.save();
+  roundRect(PX,PY,PW,PH,16); ctx.clip();
+
+  /* input area: a redacted query + a caret that blinks on steps(1) */
+  ctx.fillStyle = 'rgba(98,102,109,0.9)';
+  roundRect(PX+34, PY+INPUT_H/2-7, 232, 13, 6.5); ctx.fill();
+  const caretOn = (t % CARET_PERIOD) < CARET_PERIOD/2;      /* hard step, no fade */
+  if (caretOn){
+    ctx.fillStyle = 'rgba(247,248,248,0.85)';
+    ctx.fillRect(PX+34+232+8, PY+INPUT_H/2-13, 2, 26);
+  }
+  /* divider */
+  ctx.strokeStyle = 'rgba(255,255,255,0.08)';
+  ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(PX, PY+INPUT_H+0.5); ctx.lineTo(PX+PW, PY+INPUT_H+0.5); ctx.stroke();
+
+  /* rows */
+  for(let i=0;i<ROWS;i++){
+    const y = rowY(i), on = i === sel;
+    const a = on ? settle : 1;
+
+    if (on){
+      /* --color-accent-tint behind the selection, settling over 100ms */
+      ctx.fillStyle = `rgba(24,24,47,${0.55 + 0.45*a})`;
+      roundRect(PX+PAD, y, PW-PAD*2, ROW_H-8, 8); ctx.fill();
+      ctx.fillStyle = `rgba(113,112,255,${0.055*a})`;
+      roundRect(PX+PAD, y, PW-PAD*2, ROW_H-8, 8); ctx.fill();
+      /* 2px accent edge — the one accent in the frame */
+      ctx.fillStyle = '#7170ff';
+      ctx.globalAlpha = a;
+      roundRect(PX+PAD, y+10, 3, ROW_H-28, 2); ctx.fill();
+      ctx.globalAlpha = 1;
+    }
+
+    /* icon tile */
+    ctx.fillStyle = on ? 'rgba(255,255,255,0.09)' : 'rgba(255,255,255,0.05)';
+    roundRect(PX+PAD+24, y+(ROW_H-8)/2-15, 30, 30, 8); ctx.fill();
+    ctx.strokeStyle = 'rgba(255,255,255,0.08)';
+    ctx.lineWidth = 1;
+    roundRect(PX+PAD+24.5, y+(ROW_H-8)/2-14.5, 29, 29, 8); ctx.stroke();
+
+    /* redacted label — --color-fg-quaternary → --color-fg-primary in 100ms */
+    const k = on ? a : 0;
+    const mix = (c0,c1) => Math.round(c0 + (c1-c0)*k);
+    ctx.fillStyle = `rgb(${mix(98,247)},${mix(102,248)},${mix(109,248)})`;
+    roundRect(PX+PAD+72, y+(ROW_H-8)/2-6, items[i].title, 12, 6); ctx.fill();
+
+    /* trailing meta chip */
+    ctx.fillStyle = on ? 'rgba(255,255,255,0.10)' : 'rgba(255,255,255,0.045)';
+    roundRect(PX+PW-PAD-28-items[i].meta, y+(ROW_H-8)/2-10, items[i].meta, 20, 9999); ctx.fill();
+  }
+  ctx.restore();
+
+  /* border last, over the clip */
+  ctx.strokeStyle = 'rgba(255,255,255,0.08)';
+  ctx.lineWidth = 1;
+  roundRect(PX+0.5,PY+0.5,PW-1,PH-1,16); ctx.stroke();
+  /* --inset-topline */
+  ctx.strokeStyle = 'rgba(255,255,255,0.05)';
+  ctx.beginPath(); ctx.moveTo(PX+16, PY+1.5); ctx.lineTo(PX+PW-16, PY+1.5); ctx.stroke();
+
+  /* edge scrim */
+  const v = ctx.createRadialGradient(W/2,H/2,420,W/2,H/2,900);
+  v.addColorStop(0,'rgba(1,1,2,0)');
+  v.addColorStop(1,'rgba(1,1,2,0.72)');
+  ctx.fillStyle = v; ctx.fillRect(0,0,W,H);
+}
+
+window.LOOP = T;
+window.seek = ms => draw(((ms % T) + T) % T);
+if (location.search.includes('capture')) { draw(0); }
+else { const run = () => { draw(performance.now() % T); requestAnimationFrame(run); }; requestAnimationFrame(run); }
+</script>
+</body>
+</html>

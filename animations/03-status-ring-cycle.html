@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>03 Status ring → cycle</title>
+<style>
+  /* Tokens copied verbatim from ../style/tokens.css (Linear motion study).
+     Unofficial design study. Not affiliated with Linear. */
+  :root{
+    --color-bg-marketing:#010102;
+    --color-bg-level-0:#08090a;
+    --color-fg-quaternary:#62666d;
+    --color-accent:#7170ff;
+    --color-border-translucent-strong:#ffffff14;
+  }
+  html,body{margin:0;height:100%;background:var(--color-bg-marketing);overflow:hidden}
+  body{display:grid;place-items:center}
+  canvas{width:min(100vw,80vh);height:auto;display:block}
+</style>
+</head>
+<body>
+<canvas id="c" width="1080" height="1350"></canvas>
+<script>
+/* ---------- harness ---------- */
+const W = 1080, H = 1350, T = 5000;
+function bez(x1,y1,x2,y2){
+  const cx=3*x1, bx=3*(x2-x1)-cx, ax=1-cx-bx;
+  const cy=3*y1, by=3*(y2-y1)-cy, ay=1-cy-by;
+  const fx=u=>((ax*u+bx)*u+cx)*u, dfx=u=>(3*ax*u+2*bx)*u+cx;
+  return x=>{ if(x<=0)return 0; if(x>=1)return 1; let u=x;
+    for(let i=0;i<8;i++){const e=fx(u)-x; if(Math.abs(e)<1e-6)break; const d=dfx(u); if(Math.abs(d)<1e-6)break; u-=e/d;}
+    return ((ay*u+by)*u+cy)*u; };
+}
+const E = { outQuad:bez(.25,.46,.45,.94), outCubic:bez(.215,.61,.355,1) };
+const cl = (v,a=0,b=1)=>v<a?a:v>b?b:v;
+const ctx = document.getElementById('c').getContext('2d');
+const TAU = Math.PI*2;
+
+/* ---------- the object: a status mark ----------
+   Track ring, eight step ticks, one arc. No glyph, no letterform.   */
+const CX = 540, CY = 675;
+const R_RING = 246, LW = 16;
+const R_TICK = 294, TICK_LEN = 17;
+const STEPS = 8, BEAT = T/STEPS;         // 625ms — the step, not the motion
+const SWEEP = (TAU/STEPS) * 1.15;        // arc slightly longer than one step
+
+/* Linear's statusFlash: brightness peaks at 8% of the beat, decays by 60% */
+function flash(u){
+  if (u < 0.08) return u/0.08;
+  if (u > 0.60) return 0;
+  return 1 - E.outCubic((u-0.08)/0.52);
+}
+
+function draw(t){
+  ctx.fillStyle = '#010102';
+  ctx.fillRect(0,0,W,H);
+
+  const beat = Math.floor(t/BEAT) % STEPS;     // the change: a hard step
+  const u = (t - beat*BEAT)/BEAT;
+  const f = flash(u);
+
+  /* landing: a 160ms, 1.2% scale pop — the native amplitude */
+  const pop = 1 + 0.012 * (1 - E.outQuad(cl(u*BEAT/160)));
+
+  /* bloom behind the mark, carried by the flash */
+  const bloom = ctx.createRadialGradient(CX,CY,0,CX,CY,520);
+  bloom.addColorStop(0, `rgba(113,112,255,${0.055 + 0.065*f})`);
+  bloom.addColorStop(1, 'rgba(113,112,255,0)');
+  ctx.fillStyle = bloom; ctx.fillRect(0,0,W,H);
+
+  ctx.save();
+  ctx.translate(CX,CY); ctx.scale(pop,pop); ctx.translate(-CX,-CY);
+
+  /* track ring — a resting surface, 6% white */
+  ctx.lineWidth = LW;
+  ctx.strokeStyle = 'rgba(255,255,255,0.10)';
+  ctx.beginPath(); ctx.arc(CX,CY,R_RING,0,TAU); ctx.stroke();
+
+  /* the eight positions, dim; the live one brightens on landing */
+  ctx.lineCap = 'round';
+  ctx.lineWidth = 2;
+  for(let i=0;i<STEPS;i++){
+    const a = -Math.PI/2 + i*(TAU/STEPS);
+    const live = i === beat;
+    ctx.strokeStyle = live
+      ? `rgba(247,248,248,${0.30 + 0.60*f})`
+      : 'rgba(255,255,255,0.18)';
+    ctx.beginPath();
+    ctx.moveTo(CX + Math.cos(a)*R_TICK,              CY + Math.sin(a)*R_TICK);
+    ctx.lineTo(CX + Math.cos(a)*(R_TICK+TICK_LEN),   CY + Math.sin(a)*(R_TICK+TICK_LEN));
+    ctx.stroke();
+  }
+
+  /* the arc — the one accent in the frame */
+  const a0 = -Math.PI/2 + beat*(TAU/STEPS);
+  ctx.lineCap = 'round';
+  ctx.lineWidth = LW;
+  ctx.strokeStyle = '#7170ff';
+  ctx.globalAlpha = 0.9 + 0.1*f;
+  ctx.beginPath(); ctx.arc(CX,CY,R_RING,a0,a0+SWEEP); ctx.stroke();
+
+  /* flash pass: the same arc re-struck brighter, decaying — light, not travel */
+  if (f > 0.001){
+    ctx.globalAlpha = 0.55*f;
+    ctx.strokeStyle = '#f7f8f8';
+    ctx.beginPath(); ctx.arc(CX,CY,R_RING,a0,a0+SWEEP); ctx.stroke();
+  }
+  ctx.globalAlpha = 1;
+
+  /* inner disc: a quiet surface so the ring has something to hold */
+  ctx.fillStyle = '#08090a';
+  ctx.beginPath(); ctx.arc(CX,CY,R_RING-LW/2-26,0,TAU); ctx.fill();
+  ctx.strokeStyle = 'rgba(255,255,255,0.05)';   /* --inset-hairline */
+  ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.arc(CX,CY,R_RING-LW/2-26,0,TAU); ctx.stroke();
+
+  /* an inner ring of dots mirrors the step — hard 0.3 ↔ 1, no tween.
+     Only the live one is on, so the field returns to its start state
+     at t = T and the loop closes exactly.                            */
+  for(let i=0;i<STEPS;i++){
+    const a = -Math.PI/2 + i*(TAU/STEPS);
+    ctx.globalAlpha = (i === beat) ? 1 : 0.3;         /* --dot-opacity-on/off */
+    ctx.fillStyle = '#62666d';
+    ctx.beginPath();
+    ctx.arc(CX + Math.cos(a)*108, CY + Math.sin(a)*108, 5.5, 0, TAU);
+    ctx.fill();
+  }
+  ctx.globalAlpha = 1;
+  ctx.restore();
+
+  /* edge scrim */
+  const v = ctx.createRadialGradient(CX,CY,380,CX,CY,900);
+  v.addColorStop(0,'rgba(1,1,2,0)');
+  v.addColorStop(1,'rgba(1,1,2,0.80)');
+  ctx.fillStyle = v; ctx.fillRect(0,0,W,H);
+}
+
+window.LOOP = T;
+window.seek = ms => draw(((ms % T) + T) % T);
+if (location.search.includes('capture')) { draw(0); }
+else { const run = () => { draw(performance.now() % T); requestAnimationFrame(run); }; requestAnimationFrame(run); }
+</script>
+</body>
+</html>

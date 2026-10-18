@@ -1,0 +1,1109 @@
+
+
+######## CSS CUSTOM PROPERTIES (:root / body) ########
+(421 total)
+--_number-flow-d: 0
+--_number-flow-d-opacity: 0
+--_number-flow-d-width: 0
+--_number-flow-dx: 0px
+--100dvh: calc(100 * 1dvh)
+--100svh: calc(100 * 1svh)
+--1fr: minmax(0, 1fr)
+--border-hairline: .5px
+--btn-highlight-bg: transparent
+--btn-highlight-color: 
+--btn-overlay-shadow: none
+--btn-overlay-shadow-hover: none
+--color-accent: #7170ff
+--color-accent-hover: #828fff
+--color-accent-tint: #18182f
+--color-alpha: 255
+--color-bg-level-0: #08090a
+--color-bg-level-1: #0f1011
+--color-bg-level-2: #141516
+--color-bg-level-3: #191a1b
+--color-bg-marketing: #010102
+--color-bg-panel: #0f1011
+--color-bg-primary: #08090a
+--color-bg-quaternary: #28282c
+--color-bg-quinary: #282828
+--color-bg-secondary: #1c1c1f
+--color-bg-tertiary: #232326
+--color-bg-tint: #141516
+--color-bg-translucent: #ffffff0d
+--color-black: #000
+--color-blue: #4ea7fc
+--color-border-primary: #23252a
+--color-border-secondary: #34343a
+--color-border-tertiary: #3e3e44
+--color-border-translucent: #ffffff0d
+--color-border-translucent-strong: #ffffff14
+--color-brand-bg: #5e6ad2
+--color-brand-text: #fff
+--color-button-invert-bg: #e5e5e6
+--color-button-invert-bg-hover: #fff
+--color-fg-primary: #f7f8f8
+--color-fg-quaternary: #62666d
+--color-fg-secondary: #d0d6e0
+--color-fg-tertiary: #8a8f98
+--color-green: #27a644
+--color-indigo: #5e6ad2
+--color-line-primary: #37393a
+--color-line-quaternary: #141515
+--color-line-secondary: #202122
+--color-line-tertiary: #18191a
+--color-line-tint: #141516
+--color-linear-build: #d4b144
+--color-linear-plan: #68cc58
+--color-linear-security: #7a7fad
+--color-link-hover: #fff
+--color-link-primary: #828fff
+--color-orange: #fc7840
+--color-overlay-dim-rgb: 255, 255, 255
+--color-overlay-primary: #000000d9
+--color-red: #eb5757
+--color-selection-bg: color-mix(in lch, #5e6ad2, black 10%)
+--color-selection-dim: color-mix(in lch, #5e6ad2, transparent 80%)
+--color-selection-text: #fff
+--color-teal: #00b8cc
+--color-text-primary: #f7f8f8
+--color-text-quaternary: #62666d
+--color-text-secondary: #d0d6e0
+--color-text-tertiary: #8a8f98
+--color-white: #fff
+--color-yellow: #f0bf00
+--cursor-disabled: not-allowed
+--cursor-none: none
+--cursor-pointer: pointer
+--cursor-tooltip: help
+--dvh: 1dvh
+--ease-in-circ: cubic-bezier(.6, .04, .98, .335)
+--ease-in-cubic: cubic-bezier(.55, .055, .675, .19)
+--ease-in-expo: cubic-bezier(.95, .05, .795, .035)
+--ease-in-out-circ: cubic-bezier(.785, .135, .15, .86)
+--ease-in-out-cubic: cubic-bezier(.645, .045, .355, 1)
+--ease-in-out-expo: cubic-bezier(1, 0, 0, 1)
+--ease-in-out-quad: cubic-bezier(.455, .03, .515, .955)
+--ease-in-out-quart: cubic-bezier(.77, 0, .175, 1)
+--ease-in-out-quint: cubic-bezier(.86, 0, .07, 1)
+--ease-in-quad: cubic-bezier(.55, .085, .68, .53)
+--ease-in-quart: cubic-bezier(.895, .03, .685, .22)
+--ease-in-quint: cubic-bezier(.755, .05, .855, .06)
+--ease-out-circ: cubic-bezier(.075, .82, .165, 1)
+--ease-out-cubic: cubic-bezier(.215, .61, .355, 1)
+--ease-out-expo: cubic-bezier(.19, 1, .22, 1)
+--ease-out-quad: cubic-bezier(.25, .46, .45, .94)
+--ease-out-quart: cubic-bezier(.165, .84, .44, 1)
+--ease-out-quint: cubic-bezier(.23, 1, .32, 1)
+--editor-bg-border-thin: #3d3f44
+--editor-block-menu-offset: 28px
+--editor-block-menu-size: 20px
+--editor-block-radius: 6px
+--editor-block-spacing: 1rem
+--editor-block-spacing-large: calc(1.375 * 1rem)
+--editor-block-spacing-small: calc(.375 * 1rem)
+--editor-bullet-disc-offset: .5em
+--editor-bullet-disc-width: .5em
+--editor-font-size: .9375rem
+--editor-font-weight: 400
+--editor-hairline: 0.5px
+--editor-last-invisible-paragraph-spacing: 10px
+--editor-letter-spacing: -.00666667em
+--editor-line-height: 1.6
+--editor-list-inset: 1.5rem
+--editor-safe-area: 16px
+--editor-surface-background: #1e2022
+--editor-text-color: #e4e5e9
+--editor-todolist-checkbox-width: 14px
+--external: pointer
+--focus-ring-color: #5e69d1
+--focus-ring-offset: 2px
+--focus-ring-outline: 1px solid #5e69d1
+--focus-ring-width: 1px
+--font-emoji: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Segoe UI", "Twemoji Mozilla", "Noto Color Emoji", "Android Emoji"
+--font-monospace: "Berkeley Mono", ui-monospace, "SF Mono", "Menlo", monospace
+--font-regular: "Inter Variable", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", sans-serif
+--font-serif-display: "Tiempos Headline", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif
+--font-settings: "cv01", "ss03"
+--font-size-large: 1.125rem
+--font-size-largePlus: 1.125rem
+--font-size-micro: .6875rem
+--font-size-microPlus: .6875rem
+--font-size-mini: .75rem
+--font-size-miniPlus: .75rem
+--font-size-regular: .9375rem
+--font-size-regularPlus: .9375rem
+--font-size-small: .8125rem
+--font-size-smallPlus: .8125rem
+--font-size-title1: 2.25rem
+--font-size-title2: 1.5rem
+--font-size-title3: 1.25rem
+--font-variations: "opsz" auto
+--font-weight-bold: 680
+--font-weight-light: 300
+--font-weight-medium: 510
+--font-weight-normal: 400
+--font-weight-semibold: 590
+--grid-columns: 12
+--header-bg: #0b0b0bcc
+--header-blur: 20px
+--header-border: #ffffff14
+--header-height: 72px
+--homepage-max-width: calc(1344px + 46px * 2)
+--homepage-outer-padding: 46px
+--homepage-padding-inset: 32px
+--icon-color: 
+--icon-default-color: 
+--icon-grayscale-image-filter: grayscale(100%) brightness(400%)
+--icon-replacement-color: 
+--layer-1: 1
+--layer-2: 2
+--layer-3: 3
+--layer-command-menu: 650
+--layer-context-menu: 1200
+--layer-debug: 11000
+--layer-dialog: 700
+--layer-dialog-overlay: 699
+--layer-footer: 50
+--layer-header: 100
+--layer-max: 10000
+--layer-overlay: 500
+--layer-popover: 600
+--layer-scrollbar: 75
+--layer-skip-nav: 5000
+--layer-toasts: 800
+--layer-tooltip: 1100
+--lightningcss-dark: 
+--lightningcss-light: 
+--link-text-decoration: none
+--mask-ease: #0003
+--mask-invisible: transparent
+--mask-off: transparent
+--mask-on: black
+--mask-visible: black
+--min-tap-size: 44px
+--page-inset: 32px
+--page-max-width: 1024px
+--page-padding-block: 64px
+--page-padding-inline: 24px
+--page-padding-left: max(0px, 24px)
+--page-padding-right: max(0px, 24px)
+--pointer: default
+--prose-max-width: 624px
+--radius-12: 12px
+--radius-16: 16px
+--radius-24: 24px
+--radius-32: 32px
+--radius-4: 4px
+--radius-6: 6px
+--radius-8: 8px
+--radius-circle: 50%
+--radius-rounded: 9999px
+--rounded-full: 9999px
+--scrollbar-color: #ffffff1a
+--scrollbar-color-active: #fff6
+--scrollbar-color-hover: #fff3
+--scrollbar-gap: 4px
+--scrollbar-size: 6px
+--scrollbar-size-active: 10px
+--scrollbar-width: 12px
+--selection-bg: color-mix(in srgb, #9c9da1 20%, transparent)
+--selection-bg-active: color-mix(in srgb, #5e69d1 40%, transparent)
+--shadow-high: 0px 7px 32px #00000059
+--shadow-low: 0px 2px 4px #0000001a
+--shadow-medium: 0px 4px 24px #0003
+--shadow-none: 0px 0px 0px transparent
+--shadow-stack-low: 0px 8px 2px 0px #0000, 0px 5px 2px 0px #00000003, 0px 3px 2px 0px #0000000a, 0px 1px 1px 0px #00000012, 0px 0px 1px 0px #00000014
+--shadow-tiny: 0px 0px 0px transparent
+--speed-highlightFadeIn: 0s
+--speed-highlightFadeOut: .15s
+--speed-quickTransition: .1s
+--speed-regularTransition: .25s
+--svh: 1svh
+--sx-105wzx7: #edbf0a
+--sx-10845vo: #c9ffff
+--sx-10lzhmx: 0px 0.5px 1px 1px #0000004c
+--sx-10o0rs5: #e4e5e9
+--sx-11lpf43: 0.8125rem
+--sx-11vg3qk: #ff7235
+--sx-129bhjt: #967000
+--sx-138kmyo: #424449
+--sx-138rywl: 13vh
+--sx-13epfux: #a8aab0
+--sx-13kjjc4: #34353a
+--sx-13m9wh7: #007def
+--sx-13sdql6: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Segoe UI", "Twemoji Mozilla", "Noto Color Emoji", "Android Emoji"
+--sx-142jeir: #323439
+--sx-14ggo8w: #1f2c24
+--sx-15wwovl: #303136
+--sx-16143rj: #d9d9d9
+--sx-16hn3q3: #2c2d32
+--sx-17ckey5: #ff5d5e
+--sx-180qi0f: #d5ffd6
+--sx-183dfpr: #ff9958
+--sx-18pfyxa: 6px 12px
+--sx-18uyzu6: #008a2a
+--sx-18yrgu8: #ffffff8b
+--sx-193njt9: #ffffff22
+--sx-19hxmp1: #adbaff
+--sx-1a798ef: 6px
+--sx-1awr4hy: #c3c4c8
+--sx-1bu05id: #ff8583
+--sx-1ccqs4f: #3d3f43
+--sx-1cxqmhc: #00e8ff
+--sx-1d2fpwc: #8f9197
+--sx-1dcvabv: #382225
+--sx-1dd5bcf: #9c9da1
+--sx-1dhg814: 0 3px 8px #0000001f, 0 2px 5px #0000001f, 0 1px 1px #0000001f
+--sx-1eapsa9: #626366
+--sx-1edn6di: #393a3f
+--sx-1ele6il: 0.5px
+--sx-1em7oyp: #22324a
+--sx-1fh23cp: #9c9da1
+--sx-1fj52yw: 
+--sx-1fphd1n: #292a2e
+--sx-1gakdvt: #25283f
+--sx-1gcjx5j: #24262a
+--sx-1glqxor: #222435
+--sx-1gm0lru: #222427
+--sx-1gxylln: #27282c
+--sx-1h56kua: #f0bf00
+--sx-1hz3utq: #ff8042
+--sx-1ijrdvx: #ff8849
+--sx-1ikf7kw: #ffffff45
+--sx-1ipkkxf: "Inter Variable", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", sans-serif
+--sx-1jffjrl: #6a76e3
+--sx-1jmjcvw: #ffffff29
+--sx-1k7nh0l: #fffaa6
+--sx-1k7v50d: 0 4px 40px #00000019, 0 3px 20px #0000001f,0 3px 12px #0000001f, 0 2px 8px #0000001f, 0 1px 1px #0000001f
+--sx-1ltkoa: #626467
+--sx-1m4y240: #18191c
+--sx-1mc3c6y: #1e2022
+--sx-1n1r1h9: #ffffff0d
+--sx-1o1lnwn: #3d3f44
+--sx-1ospiv4: #ffffff22
+--sx-1ps2i54: #1c2f34
+--sx-1q6smeb: #ff6565
+--sx-1qdowq0: #00000066
+--sx-1qlh175: #00889c
+--sx-1rsaf4u: #2a2d48
+--sx-1rzu7x2: #626366
+--sx-1stx5uy: #74e3ff
+--sx-1ub7w50: #ffffffa7
+--sx-1ubxoo9: #1e2022
+--sx-1umwnkk: "Berkeley Mono", ui-monospace, "SF Mono", "Menlo", monospace
+--sx-1uoekal: #00b8cb
+--sx-1urpf9d: #ffffff18
+--sx-1uu732i: 12px
+--sx-1uv3w6h: #2c2d32
+--sx-1uztw8p: #ffffff30
+--sx-1vqca58: #69daff
+--sx-1vyp3gc: #ffeac6
+--sx-1xaoi8i: #7a88ff
+--sx-1yxqotz: #5e6ad2
+--sx-2icmlu: #08080826
+--sx-34xdpc: #d9343f
+--sx-35jz1e: #3c3f5c
+--sx-3zwjav: #e4e5e9
+--sx-5igtf4: #ffffff1b
+--sx-5t1vcl: #00ceff
+--sx-629164: #323337
+--sx-6ayg1n: #2c2e34
+--sx-6od1kq: #dbffff
+--sx-6zt3z6: 1px solid #323439
+--sx-74qs5: #00000001
+--sx-7ide1: #747ee9
+--sx-7jk47a: #313336
+--sx-8gevfv: #43bc58
+--sx-91u3ar: #ffcc00
+--sx-9jlh1t: #ffffffb5
+--sx-9o00jb: #00c6d9
+--sx-9pdekr: #b5b7bd
+--sx-as9fd0: #282a30
+--sx-axo4ug: 0 0 0 0.5px #323439
+--sx-bpgheo: #636fd7
+--sx-c3gk8m: 0 0 0 1px #5e69d1
+--sx-cb0zzs: #33353b
+--sx-ch85qk: #5e69d1
+--sx-ciqj87: #3de261
+--sx-cx2ark: #37393e
+--sx-d1bcc1: #08080826
+--sx-d29rh7: #28292e
+--sx-ds2y8i: 5px
+--sx-f6abet: #b1b2b6
+--sx-fwc8so: #cf4608
+--sx-g52i5g: #1b1e25
+--sx-hfmm6c: #292a2e
+--sx-i20l48: #f34e52
+--sx-ickszr: #fefeff
+--sx-ikq9iy: #3b2523
+--sx-irmyh9: #ffffff13
+--sx-j1ai0m: #e4e5e9
+--sx-jw5zf4: #39b350
+--sx-k68kma: #37393e
+--sx-kthb5v: #6c76e0
+--sx-ljw4h1: #393a3e
+--sx-msgncm: #373021
+--sx-n8xqcl: #5e69d1
+--sx-or1tl7: #55ccff
+--sx-ot17o6: #00cee2
+--sx-pqiwo2: #373a56
+--sx-tw6awd: #ffe7de
+--sx-ugsh4: #ffd500
+--sx-umgfby: 0 1px 1px inset #00000011, 0 1px 3px inset #00000011, 0 2px 5px inset #00000019
+--sx-v3o8qy: #636467
+--sx-w1p5jj: #53555a
+--sx-ws85c5: #fcfaff
+--sx-wsz0k3: #26a544
+--sx-x8afrf: 6px
+--sx-ykavoc: 8px
+--sx-ys2i3t: #ffffff
+--text-large: 1.0625rem / 1.6 "Inter Variable", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", sans-serif
+--text-large-letter-spacing: 0
+--text-large-line-height: 1.6
+--text-large-size: 1.0625rem
+--text-micro: .75rem / 1.4 "Inter Variable", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", sans-serif
+--text-micro-letter-spacing: 0
+--text-micro-line-height: 1.4
+--text-micro-size: .75rem
+--text-mini: .8125rem / 1.5 "Inter Variable", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", sans-serif
+--text-mini-letter-spacing: -.01em
+--text-mini-line-height: 1.5
+--text-mini-size: .8125rem
+--text-regular: .9375rem / 1.6 "Inter Variable", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", sans-serif
+--text-regular-letter-spacing: -.011em
+--text-regular-line-height: 1.6
+--text-regular-size: .9375rem
+--text-small: .875rem / calc(21 / 14) "Inter Variable", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", sans-serif
+--text-small-letter-spacing: -.013em
+--text-small-line-height: calc(21 / 14)
+--text-small-size: .875rem
+--text-tiny: .625rem / 1.5 "Inter Variable", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", sans-serif
+--text-tiny-letter-spacing: -.015em
+--text-tiny-line-height: 1.5
+--text-tiny-size: .625rem
+--title-1: 590 1.0625rem / 1.4 "Inter Variable", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", sans-serif
+--title-1-letter-spacing: -.012em
+--title-1-line-height: 1.4
+--title-1-size: 1.0625rem
+--title-2: 590 1.25rem / 1.33 "Inter Variable", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", sans-serif
+--title-2-letter-spacing: -.012em
+--title-2-line-height: 1.33
+--title-2-size: 1.25rem
+--title-3: 590 1.5rem / 1.33 "Inter Variable", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", sans-serif
+--title-3-letter-spacing: -.012em
+--title-3-line-height: 1.33
+--title-3-size: 1.5rem
+--title-4: 590 2rem / 1.125 "Inter Variable", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", sans-serif
+--title-4-letter-spacing: -.022em
+--title-4-line-height: 1.125
+--title-4-size: 2rem
+--title-5: 590 2.5rem / 1.1 "Inter Variable", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", sans-serif
+--title-5-letter-spacing: -.022em
+--title-5-line-height: 1.1
+--title-5-size: 2.5rem
+--title-6: 590 3rem / 1 "Inter Variable", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", sans-serif
+--title-6-letter-spacing: -.022em
+--title-6-line-height: 1
+--title-6-size: 3rem
+--title-7: 590 3.5rem / 1.1 "Inter Variable", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", sans-serif
+--title-7-letter-spacing: -.022em
+--title-7-line-height: 1.1
+--title-7-size: 3.5rem
+--title-8: 590 4rem / 1.06 "Inter Variable", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", sans-serif
+--title-8-letter-spacing: -.022em
+--title-8-line-height: 1.06
+--title-8-size: 4rem
+--title-9: 590 4.5rem / 1 "Inter Variable", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", sans-serif
+--title-9-letter-spacing: -.022em
+--title-9-line-height: 1
+--title-9-size: 4.5rem
+--transparent: #fff0
+--underline-offset: clamp(2px, .175em, 4px)
+--underline-thickness: from-font
+--zoom-in: zoom-in
+--zoom-out: zoom-out
+
+######## COLORS ########
+ 2612×  rgb(247, 248, 248)
+  640×  rgb(138, 143, 152)
+  359×  rgb(98, 102, 109)
+  237×  rgb(208, 214, 224)
+  120×  rgb(226, 228, 231)
+  115×  rgb(255, 255, 255)
+   82×  rgb(8, 9, 10)
+   41×  rgb(247, 156, 224)
+   38×  rgb(15, 16, 17)
+   27×  rgb(40, 42, 48)
+   22×  rgb(247, 191, 139)
+   16×  rgba(0, 255, 5, 0.1)
+   13×  rgba(255, 255, 255, 0.02)
+   10×  rgb(255, 223, 159)
+   10×  rgb(197, 40, 40)
+   10×  rgb(242, 153, 74)
+   10×  rgb(66, 175, 34)
+    9×  rgb(94, 106, 210)
+    9×  rgb(131, 220, 220)
+    8×  rgba(255, 255, 255, 0.05)
+    8×  rgb(148, 148, 150)
+    8×  rgb(143, 166, 255)
+    6×  rgb(229, 229, 230)
+    6×  rgb(22, 23, 24)
+    6×  color(srgb 0.0588235 0.0627451 0.0666667 / 0.95)
+    6×  rgb(28, 28, 31)
+    4×  rgb(243, 78, 82)
+    4×  rgb(78, 167, 252)
+    4×  rgba(243, 78, 82, 0.1)
+    4×  rgba(39, 166, 68, 0.07)
+    3×  rgba(255, 255, 255, 0.03)
+    3×  rgb(235, 87, 87)
+    3×  rgb(98, 99, 102)
+    3×  rgba(255, 0, 0, 0.12)
+    2×  rgb(226, 228, 230)
+    2×  rgb(39, 166, 68)
+    1×  rgb(9, 10, 11)
+    1×  rgb(16, 17, 18)
+    1×  rgb(18, 20, 20)
+    1×  rgba(255, 255, 255, 0.04)
+    1×  rgba(255, 255, 255, 0.01)
+    1×  rgb(85, 85, 87)
+    1×  rgb(28, 28, 29)
+    1×  rgb(220, 255, 255)
+    1×  rgb(109, 120, 213)
+    1×  rgba(109, 120, 213, 0.15)
+    1×  rgba(255, 255, 255, 0.07)
+    1×  rgb(228, 242, 34)
+    1×  rgb(16, 18, 19)
+    1×  rgb(226, 242, 255)
+    1×  rgba(255, 255, 255, 0.1)
+    1×  rgb(130, 143, 255)
+    1×  rgb(0, 0, 0)
+    1×  rgb(0, 184, 204)
+    1×  rgb(255, 114, 54)
+    1×  rgb(30, 31, 32)
+
+######## BGIMAGES ########
+   16×  linear-gradient(rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.02)), none
+    9×  url("https://linear.app/cdn-cgi/imagedelivery/fO02fVwohEs9s9UHFwon6A/eb981988-eecf-4b40-5500-049641170e00/f=auto,fit=scale-down,metadata=none")
+    6×  linear-gradient(rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.04)), none
+    6×  linear-gradient(90deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.02) 100%), none
+    6×  linear-gradient(rgb(74, 74, 85) 0%, rgb(42, 42, 49) 100%)
+    6×  linear-gradient(90deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.02) 100%), linear-gradient(90deg, rgba(15, 16, 17, 0.95) 0%, rgba(15, 16, 17, 0.95) 100%)
+    5×  radial-gradient(circle, rgba(255, 255, 255, 0.04) 0%, rgba(0, 0, 0, 0) 50%)
+    5×  linear-gradient(90deg, rgba(255, 255, 255, 0.01) 0%, rgba(255, 255, 255, 0.01) 100%), linear-gradient(90deg, rgb(15, 16, 17) 0%, rgb(15, 16, 17) 100%)
+    4×  linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05)), none
+    4×  linear-gradient(to right, rgba(0, 0, 0, 0), rgb(8, 9, 10))
+    3×  url("https://linear.app/cdn-cgi/imagedelivery/fO02fVwohEs9s9UHFwon6A/cd9c3c96-fbba-4687-8e50-da703a608000/f=auto,fit=scale-down,metadata=none")
+    3×  url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20180%2072%22%20fill%3D%22none%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3Cfilter%20id%3D%22blur%22%20x%3D%22-100%25%22%20y%3D%22-100%25%22%20width%3D%22300%25%22%20height%3D%22300%25%22%3E%0A
+    2×  linear-gradient(rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.03)), none
+    2×  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1280' height='832' fill='none'%3E%3Cpath fill='%231C1D1E' d='M0 0h1280v832H0z'/%3E%3Cg filter='url(%23a)' opacity='0.22'%3E%3Crect width='240' height='560' x='781' y='133' fill='%23F7F8F8' rx='120' transform='rotate(45 781 133)
+    2×  linear-gradient(90deg, color(srgb 0 0 0 / 0) 0%, color(srgb 0.129412 0.701961 1 / 0.2) 100%), linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05)), none
+    2×  linear-gradient(rgba(0, 0, 0, 0) 0%, oklab(0 0 0 / 0) 100%)
+    1×  linear-gradient(rgba(11, 11, 11, 0.8) 0%, oklab(0.149576 0.00000680983 0.00000298768 / 0.761905) 100%)
+    1×  radial-gradient(52.53% 57.5% at 50% 100%, rgba(8, 9, 10, 0) 0%, rgba(8, 9, 10, 0.5) 100%), linear-gradient(rgb(8, 9, 10) 10%, rgb(208, 214, 224) 100%)
+    1×  radial-gradient(50% 50%, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0) 90%)
+    1×  linear-gradient(rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.03)), linear-gradient(rgb(22, 23, 24), rgb(22, 23, 24)), linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 25%)
+    1×  linear-gradient(90deg, color(srgb 0 0 0 / 0) 0%, color(srgb 0.921569 0.341176 0.341176 / 0.2) 100%), linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05)), none
+    1×  radial-gradient(circle, rgba(255, 255, 255, 0.03) 0%, rgba(0, 0, 0, 0) 50%)
+    1×  linear-gradient(0deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.4) 100%), linear-gradient(rgb(178, 213, 255) 0%, rgb(223, 209, 255) 100%)
+    1×  linear-gradient(rgb(207, 215, 226) 0%, rgb(253, 245, 242) 100%)
+
+######## FONTS ########
+ 4005×  "Inter Variable", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif
+  280×  "Berkeley Mono", ui-monospace, "SF Mono", Menlo, monospace
+
+######## FONTSIZES ########
+ 2773×  16px
+  415×  13px
+  310×  12px
+  278×  14px
+  234×  15px
+  162×  13.3333px
+   28×  10px
+   25×  24px
+   20×  48px
+   20×  18px
+    6×  32px
+    5×  72px
+    4×  64px
+    3×  11px
+    2×  20px
+
+######## FONTWEIGHTS ########
+ 3871×  400
+  364×  510
+   16×  500
+   13×  590
+   12×  390
+    8×  300
+    1×  700
+
+######## LETTERSPACING ########
+  300×  -0.13px
+  231×  -0.165px
+   25×  -0.288px
+   23×  -0.15px
+   22×  -0.182px
+   20×  -1.056px
+    8×  -0.039px
+    8×  -0.06px
+    6×  -0.704px
+    5×  -1.584px
+    4×  -1.408px
+    1×  -0.24px
+
+######## RADII ########
+  110×  9999px
+   72×  8px
+   39×  4px
+   34×  50%
+   32×  12px
+   24×  12px 12px 0px 0px
+   21×  999px
+   18×  9px
+   17×  6px
+    8×  5px
+    6×  2px
+    6×  16px
+    4×  2px 0px 0px 2px
+    4×  0px 2px 2px 0px
+    3×  4px 0px 0px 4px
+    3×  0px 4px 4px 0px
+    2×  22px
+    2×  8px 0px 0px
+    2×  8px 8px 8px 2px
+    1×  400px
+
+######## SHADOWS ########
+   12×  rgb(8, 9, 10) 0px 8.576px 12.863px 0px, rgb(8, 9, 10) 0px 0px 68.604px 0px
+    8×  rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset
+    8×  rgba(0, 0, 0, 0.2) 0px 0px 0px 1px
+    7×  rgba(0, 0, 0, 0.2) 0px 0px 12px 0px inset
+    6×  rgba(0, 0, 0, 0) 0px 8px 2px 0px, rgba(0, 0, 0, 0.01) 0px 5px 2px 0px, rgba(0, 0, 0, 0.04) 0px 3px 2px 0px, rgba(0, 0, 0, 0.07) 0px 1px 1px 0px, rgba(0, 0, 0, 0.08) 0px 0px 1px 0px
+    5×  rgba(0, 0, 0, 0.25) 0px 2px 32px 0px
+    5×  rgba(255, 255, 255, 0.08) 0px 0px 0px 0.5px inset
+    5×  rgba(0, 0, 0, 0.15) 0px 4px 12px 0px
+    3×  rgb(35, 37, 42) 0px 0px 0px 1px inset
+    3×  rgba(255, 255, 255, 0.03) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.04) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.6) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 4px 4px 0px
+    2×  rgba(0, 0, 0, 0.06) 0px 4px 4px -1px, rgba(0, 0, 0, 0.12) 0px 1px 1px 0px
+    2×  rgba(0, 0, 0, 0.4) 0px 1px 0px 0px
+    1×  rgba(0, 0, 0, 0.2) 0px 0px 0px 2px
+    1×  rgba(94, 106, 210, 0.4) 0px 0px 0px 3px
+    1×  rgb(35, 37, 42) 0px 0px 0px 1px inset, rgba(8, 9, 10, 0.8) 0px 0px 32px 0px
+    1×  rgb(35, 37, 42) 1px 0px 0px 0px inset
+    1×  rgba(0, 0, 0, 0) 0px 400px 112px 0px, rgba(0, 0, 0, 0.01) 0px 256px 103px 0px, rgba(0, 0, 0, 0.05) 0px 144px 86px 0px, rgba(0, 0, 0, 0.09) 0px 64px 64px 0px, rgba(0, 0, 0, 0.1) 0px 16px 35px 0px
+
+######## FILTERS ########
+    9×  blur(4px)
+    6×  blur(3.752px)
+    3×  blur(20px)
+
+######## BORDERS ########
+   95×  1px solid rgba(255, 255, 255, 0.08)
+   12×  1px solid rgba(255, 255, 255, 0.05)
+   11×  1px solid rgba(255, 255, 255, 0.12)
+    7×  1px solid rgb(35, 37, 42)
+    6×  1px solid rgb(229, 229, 230)
+    6×  1px solid rgb(21, 22, 24)
+    5×  1px solid rgba(0, 0, 0, 0)
+    2×  1px solid rgb(46, 46, 50)
+    1×  1px solid rgb(36, 40, 44)
+    1×  1px solid rgba(255, 255, 255, 0.06)
+    1×  1px solid rgb(42, 42, 45)
+
+######## TRANSITIONS ########
+  187×  color | 0.1s | cubic-bezier(0.25, 0.46, 0.45, 0.94)
+  102×  color | 0.1s | ease
+   24×  opacity | 0.7s | cubic-bezier(0.645, 0.045, 0.355, 1)
+   22×  filter, transform | 0.16s, 0.16s | cubic-bezier(0.25, 0.46, 0.45, 0.94), cubic-bezier(0.25, 0.46, 0.45, 0.94)
+   21×  color, background | 0.1s | cubic-bezier(0.25, 0.46, 0.45, 0.94)
+   21×  filter | 0.2s | cubic-bezier(0.165, 0.84, 0.44, 1)
+   20×  color | 0.16s | cubic-bezier(0.25, 0.46, 0.45, 0.94)
+   19×  background | 0.4s | ease-out
+   18×  filter | 0.16s | cubic-bezier(0.25, 0.46, 0.45, 0.94)
+   12×  transform, filter | 0.7s | cubic-bezier(0.645, 0.045, 0.355, 1)
+   10×  border, background-color, color, box-shadow, opacity, filter, transform | 0.16s | cubic-bezier(0.25, 0.46, 0.45, 0.94)
+    8×  transform | 0.15s | ease
+    8×  background-color, border-left-color | 0.1s, 0.1s | cubic-bezier(0.25, 0.46, 0.45, 0.94), cubic-bezier(0.25, 0.46, 0.45, 0.94)
+    8×  opacity | 0.1s | cubic-bezier(0.215, 0.61, 0.355, 1)
+    6×  opacity, filter | 0.3s, 0.3s | ease-out, ease-out
+    5×  transform | 0.7s | cubic-bezier(0.32, 0.72, 0, 1)
+    5×  stroke | 0.7s | cubic-bezier(0.32, 0.72, 0, 1)
+    4×  background, color | 0.16s, 0.16s | cubic-bezier(0.25, 0.46, 0.45, 0.94), cubic-bezier(0.25, 0.46, 0.45, 0.94)
+    4×  filter | 0.1s | ease
+    4×  color | 0.1s | cubic-bezier(0.215, 0.61, 0.355, 1)
+    3×  border-color, background | 0.1s | cubic-bezier(0.25, 0.46, 0.45, 0.94)
+    3×  background | 0.16s | cubic-bezier(0.25, 0.46, 0.45, 0.94)
+    3×  color, text-decoration-color, background | 0.25s | ease
+    2×  transform | 0.16s | cubic-bezier(0.25, 0.46, 0.45, 0.94)
+    2×  opacity | 1s | cubic-bezier(0.215, 0.61, 0.355, 1)
+    2×  opacity | 0.15s | ease-out
+    1×  filter | 0.2s | cubic-bezier(0.25, 0.46, 0.45, 0.94)
+
+######## ANIMATIONS ########
+    3×  -VOcTG_agentLabelSweep | 2s | linear | 1
+    2×  J1CkbW_offsetIsometric | 1s | linear | infinite
+    2×  J1CkbW_move | 2.5s | linear | infinite
+    2×  _4phDSW_cursorIn | 0.25s | cubic-bezier(0.215, 0.61, 0.355, 1) | 1
+    1×  PPSGPG_blink | 1.2s | steps(1) | infinite
+
+######## SPACING ########
+  158×  4px
+  151×  8px
+   94×  6px
+   51×  32px
+   27×  12px
+   23×  16px
+   23×  20px
+   22×  2px
+   17×  10px
+   17×  128px
+   14×  24px
+   11×  1px
+   10×  48px
+    7×  11px
+    7×  5px
+    7×  96px
+    6×  7.38px
+    6×  9.84px
+    5×  14px
+    5×  36px
+    3×  72px
+    3×  64px
+    3×  40px
+    3×  56px
+
+######## @KEYFRAMES ########
+@keyframes grid-dot-0-0-upDown { 0% { opacity: 0.3; } 7.14286% { opacity: 0.3; } 7.14286% { opacity: 0.3; } 14.2857% { opacity: 0.3; } 14.2857% { opacity: 0.3; } 21.4286% { opacity: 0.3; } 21.4286% { opacity: 0.3; } 28.5714% { opacity: 0.3; } 28.5714% { opacity: 0.3; } 35.7143% { opacity: 0.3; } 35.7143% { opacity: 0.3; } 42.8571% { opacity: 0.3; } 42.8571% { opacity: 0.3; } 50% { opacity: 0.3; } 50% { opacity: 0.3; } 57.1429% {  }
+@keyframes grid-dot-0-1-upDown { 0% { opacity: 0.3; } 7.14286% { opacity: 0.3; } 7.14286% { opacity: 0.3; } 14.2857% { opacity: 0.3; } 14.2857% { opacity: 0.3; } 21.4286% { opacity: 0.3; } 21.4286% { opacity: 0.3; } 28.5714% { opacity: 0.3; } 28.5714% { opacity: 0.3; } 35.7143% { opacity: 0.3; } 35.7143% { opacity: 1; } 42.8571% { opacity: 1; } 42.8571% { opacity: 0.3; } 50% { opacity: 0.3; } 50% { opacity: 0.3; } 57.1429% { opac }
+@keyframes grid-dot-0-2-upDown { 0% { opacity: 0.3; } 7.14286% { opacity: 0.3; } 7.14286% { opacity: 0.3; } 14.2857% { opacity: 0.3; } 14.2857% { opacity: 0.3; } 21.4286% { opacity: 0.3; } 21.4286% { opacity: 0.3; } 28.5714% { opacity: 0.3; } 28.5714% { opacity: 1; } 35.7143% { opacity: 1; } 35.7143% { opacity: 1; } 42.8571% { opacity: 1; } 42.8571% { opacity: 1; } 50% { opacity: 1; } 50% { opacity: 1; } 57.1429% { opacity: 1; }  }
+@keyframes grid-dot-0-3-upDown { 0% { opacity: 0.3; } 7.14286% { opacity: 0.3; } 7.14286% { opacity: 0.3; } 14.2857% { opacity: 0.3; } 14.2857% { opacity: 0.3; } 21.4286% { opacity: 0.3; } 21.4286% { opacity: 0.3; } 28.5714% { opacity: 0.3; } 28.5714% { opacity: 0.3; } 35.7143% { opacity: 0.3; } 35.7143% { opacity: 1; } 42.8571% { opacity: 1; } 42.8571% { opacity: 0.3; } 50% { opacity: 0.3; } 50% { opacity: 0.3; } 57.1429% { opac }
+@keyframes grid-dot-0-4-upDown { 0% { opacity: 0.3; } 7.14286% { opacity: 0.3; } 7.14286% { opacity: 0.3; } 14.2857% { opacity: 0.3; } 14.2857% { opacity: 0.3; } 21.4286% { opacity: 0.3; } 21.4286% { opacity: 0.3; } 28.5714% { opacity: 0.3; } 28.5714% { opacity: 0.3; } 35.7143% { opacity: 0.3; } 35.7143% { opacity: 0.3; } 42.8571% { opacity: 0.3; } 42.8571% { opacity: 0.3; } 50% { opacity: 0.3; } 50% { opacity: 0.3; } 57.1429% {  }
+@keyframes grid-dot-1-0-upDown { 0% { opacity: 0.3; } 7.14286% { opacity: 0.3; } 7.14286% { opacity: 0.3; } 14.2857% { opacity: 0.3; } 14.2857% { opacity: 0.3; } 21.4286% { opacity: 0.3; } 21.4286% { opacity: 0.3; } 28.5714% { opacity: 0.3; } 28.5714% { opacity: 0.3; } 35.7143% { opacity: 0.3; } 35.7143% { opacity: 0.3; } 42.8571% { opacity: 0.3; } 42.8571% { opacity: 0.3; } 50% { opacity: 0.3; } 50% { opacity: 0.3; } 57.1429% {  }
+@keyframes grid-dot-1-1-upDown { 0% { opacity: 0.3; } 7.14286% { opacity: 0.3; } 7.14286% { opacity: 0.3; } 14.2857% { opacity: 0.3; } 14.2857% { opacity: 0.3; } 21.4286% { opacity: 0.3; } 21.4286% { opacity: 0.3; } 28.5714% { opacity: 0.3; } 28.5714% { opacity: 1; } 35.7143% { opacity: 1; } 35.7143% { opacity: 0.3; } 42.8571% { opacity: 0.3; } 42.8571% { opacity: 0.3; } 50% { opacity: 0.3; } 50% { opacity: 0.3; } 57.1429% { opac }
+@keyframes grid-dot-1-2-upDown { 0% { opacity: 0.3; } 7.14286% { opacity: 0.3; } 7.14286% { opacity: 0.3; } 14.2857% { opacity: 0.3; } 14.2857% { opacity: 0.3; } 21.4286% { opacity: 0.3; } 21.4286% { opacity: 1; } 28.5714% { opacity: 1; } 28.5714% { opacity: 1; } 35.7143% { opacity: 1; } 35.7143% { opacity: 1; } 42.8571% { opacity: 1; } 42.8571% { opacity: 1; } 50% { opacity: 1; } 50% { opacity: 0.3; } 57.1429% { opacity: 0.3; }  }
+@keyframes grid-dot-1-3-upDown { 0% { opacity: 0.3; } 7.14286% { opacity: 0.3; } 7.14286% { opacity: 0.3; } 14.2857% { opacity: 0.3; } 14.2857% { opacity: 0.3; } 21.4286% { opacity: 0.3; } 21.4286% { opacity: 0.3; } 28.5714% { opacity: 0.3; } 28.5714% { opacity: 1; } 35.7143% { opacity: 1; } 35.7143% { opacity: 0.3; } 42.8571% { opacity: 0.3; } 42.8571% { opacity: 0.3; } 50% { opacity: 0.3; } 50% { opacity: 0.3; } 57.1429% { opac }
+@keyframes grid-dot-1-4-upDown { 0% { opacity: 0.3; } 7.14286% { opacity: 0.3; } 7.14286% { opacity: 0.3; } 14.2857% { opacity: 0.3; } 14.2857% { opacity: 0.3; } 21.4286% { opacity: 0.3; } 21.4286% { opacity: 0.3; } 28.5714% { opacity: 0.3; } 28.5714% { opacity: 0.3; } 35.7143% { opacity: 0.3; } 35.7143% { opacity: 0.3; } 42.8571% { opacity: 0.3; } 42.8571% { opacity: 0.3; } 50% { opacity: 0.3; } 50% { opacity: 0.3; } 57.1429% {  }
+@keyframes grid-dot-2-0-upDown { 0% { opacity: 0.3; } 7.14286% { opacity: 0.3; } 7.14286% { opacity: 0.3; } 14.2857% { opacity: 0.3; } 14.2857% { opacity: 0.3; } 21.4286% { opacity: 0.3; } 21.4286% { opacity: 0.3; } 28.5714% { opacity: 0.3; } 28.5714% { opacity: 0.3; } 35.7143% { opacity: 0.3; } 35.7143% { opacity: 0.3; } 42.8571% { opacity: 0.3; } 42.8571% { opacity: 0.3; } 50% { opacity: 0.3; } 50% { opacity: 0.3; } 57.1429% {  }
+@keyframes grid-dot-2-1-upDown { 0% { opacity: 0.3; } 7.14286% { opacity: 0.3; } 7.14286% { opacity: 0.3; } 14.2857% { opacity: 0.3; } 14.2857% { opacity: 0.3; } 21.4286% { opacity: 0.3; } 21.4286% { opacity: 1; } 28.5714% { opacity: 1; } 28.5714% { opacity: 0.3; } 35.7143% { opacity: 0.3; } 35.7143% { opacity: 0.3; } 42.8571% { opacity: 0.3; } 42.8571% { opacity: 0.3; } 50% { opacity: 0.3; } 50% { opacity: 0.3; } 57.1429% { opac }
+@keyframes grid-dot-2-2-upDown { 0% { opacity: 0.3; } 7.14286% { opacity: 0.3; } 7.14286% { opacity: 0.3; } 14.2857% { opacity: 0.3; } 14.2857% { opacity: 1; } 21.4286% { opacity: 1; } 21.4286% { opacity: 1; } 28.5714% { opacity: 1; } 28.5714% { opacity: 1; } 35.7143% { opacity: 1; } 35.7143% { opacity: 1; } 42.8571% { opacity: 1; } 42.8571% { opacity: 0.3; } 50% { opacity: 0.3; } 50% { opacity: 0.3; } 57.1429% { opacity: 0.3; }  }
+@keyframes grid-dot-2-3-upDown { 0% { opacity: 0.3; } 7.14286% { opacity: 0.3; } 7.14286% { opacity: 0.3; } 14.2857% { opacity: 0.3; } 14.2857% { opacity: 0.3; } 21.4286% { opacity: 0.3; } 21.4286% { opacity: 1; } 28.5714% { opacity: 1; } 28.5714% { opacity: 0.3; } 35.7143% { opacity: 0.3; } 35.7143% { opacity: 0.3; } 42.8571% { opacity: 0.3; } 42.8571% { opacity: 0.3; } 50% { opacity: 0.3; } 50% { opacity: 0.3; } 57.1429% { opac }
+@keyframes grid-dot-2-4-upDown { 0% { opacity: 0.3; } 7.14286% { opacity: 0.3; } 7.14286% { opacity: 0.3; } 14.2857% { opacity: 0.3; } 14.2857% { opacity: 0.3; } 21.4286% { opacity: 0.3; } 21.4286% { opacity: 0.3; } 28.5714% { opacity: 0.3; } 28.5714% { opacity: 0.3; } 35.7143% { opacity: 0.3; } 35.7143% { opacity: 0.3; } 42.8571% { opacity: 0.3; } 42.8571% { opacity: 0.3; } 50% { opacity: 0.3; } 50% { opacity: 0.3; } 57.1429% {  }
+@keyframes grid-dot-3-0-upDown { 0% { opacity: 0.3; } 7.14286% { opacity: 0.3; } 7.14286% { opacity: 0.3; } 14.2857% { opacity: 0.3; } 14.2857% { opacity: 0.3; } 21.4286% { opacity: 0.3; } 21.4286% { opacity: 0.3; } 28.5714% { opacity: 0.3; } 28.5714% { opacity: 0.3; } 35.7143% { opacity: 0.3; } 35.7143% { opacity: 0.3; } 42.8571% { opacity: 0.3; } 42.8571% { opacity: 0.3; } 50% { opacity: 0.3; } 50% { opacity: 0.3; } 57.1429% {  }
+@keyframes grid-dot-3-1-upDown { 0% { opacity: 0.3; } 7.14286% { opacity: 0.3; } 7.14286% { opacity: 0.3; } 14.2857% { opacity: 0.3; } 14.2857% { opacity: 1; } 21.4286% { opacity: 1; } 21.4286% { opacity: 0.3; } 28.5714% { opacity: 0.3; } 28.5714% { opacity: 0.3; } 35.7143% { opacity: 0.3; } 35.7143% { opacity: 0.3; } 42.8571% { opacity: 0.3; } 42.8571% { opacity: 0.3; } 50% { opacity: 0.3; } 50% { opacity: 0.3; } 57.1429% { opac }
+@keyframes grid-dot-3-2-upDown { 0% { opacity: 0.3; } 7.14286% { opacity: 0.3; } 7.14286% { opacity: 1; } 14.2857% { opacity: 1; } 14.2857% { opacity: 1; } 21.4286% { opacity: 1; } 21.4286% { opacity: 1; } 28.5714% { opacity: 1; } 28.5714% { opacity: 1; } 35.7143% { opacity: 1; } 35.7143% { opacity: 0.3; } 42.8571% { opacity: 0.3; } 42.8571% { opacity: 0.3; } 50% { opacity: 0.3; } 50% { opacity: 0.3; } 57.1429% { opacity: 0.3; }  }
+@keyframes grid-dot-3-3-upDown { 0% { opacity: 0.3; } 7.14286% { opacity: 0.3; } 7.14286% { opacity: 0.3; } 14.2857% { opacity: 0.3; } 14.2857% { opacity: 1; } 21.4286% { opacity: 1; } 21.4286% { opacity: 0.3; } 28.5714% { opacity: 0.3; } 28.5714% { opacity: 0.3; } 35.7143% { opacity: 0.3; } 35.7143% { opacity: 0.3; } 42.8571% { opacity: 0.3; } 42.8571% { opacity: 0.3; } 50% { opacity: 0.3; } 50% { opacity: 0.3; } 57.1429% { opac }
+@keyframes grid-dot-3-4-upDown { 0% { opacity: 0.3; } 7.14286% { opacity: 0.3; } 7.14286% { opacity: 0.3; } 14.2857% { opacity: 0.3; } 14.2857% { opacity: 0.3; } 21.4286% { opacity: 0.3; } 21.4286% { opacity: 0.3; } 28.5714% { opacity: 0.3; } 28.5714% { opacity: 0.3; } 35.7143% { opacity: 0.3; } 35.7143% { opacity: 0.3; } 42.8571% { opacity: 0.3; } 42.8571% { opacity: 0.3; } 50% { opacity: 0.3; } 50% { opacity: 0.3; } 57.1429% {  }
+@keyframes grid-dot-4-0-upDown { 0% { opacity: 0.3; } 7.14286% { opacity: 0.3; } 7.14286% { opacity: 0.3; } 14.2857% { opacity: 0.3; } 14.2857% { opacity: 0.3; } 21.4286% { opacity: 0.3; } 21.4286% { opacity: 0.3; } 28.5714% { opacity: 0.3; } 28.5714% { opacity: 0.3; } 35.7143% { opacity: 0.3; } 35.7143% { opacity: 0.3; } 42.8571% { opacity: 0.3; } 42.8571% { opacity: 0.3; } 50% { opacity: 0.3; } 50% { opacity: 0.3; } 57.1429% {  }
+@keyframes grid-dot-4-1-upDown { 0% { opacity: 0.3; } 7.14286% { opacity: 0.3; } 7.14286% { opacity: 1; } 14.2857% { opacity: 1; } 14.2857% { opacity: 0.3; } 21.4286% { opacity: 0.3; } 21.4286% { opacity: 0.3; } 28.5714% { opacity: 0.3; } 28.5714% { opacity: 0.3; } 35.7143% { opacity: 0.3; } 35.7143% { opacity: 0.3; } 42.8571% { opacity: 0.3; } 42.8571% { opacity: 0.3; } 50% { opacity: 0.3; } 50% { opacity: 0.3; } 57.1429% { opac }
+@keyframes grid-dot-4-2-upDown { 0% { opacity: 1; } 7.14286% { opacity: 1; } 7.14286% { opacity: 1; } 14.2857% { opacity: 1; } 14.2857% { opacity: 1; } 21.4286% { opacity: 1; } 21.4286% { opacity: 1; } 28.5714% { opacity: 1; } 28.5714% { opacity: 0.3; } 35.7143% { opacity: 0.3; } 35.7143% { opacity: 0.3; } 42.8571% { opacity: 0.3; } 42.8571% { opacity: 0.3; } 50% { opacity: 0.3; } 50% { opacity: 0.3; } 57.1429% { opacity: 0.3; }  }
+@keyframes grid-dot-4-3-upDown { 0% { opacity: 0.3; } 7.14286% { opacity: 0.3; } 7.14286% { opacity: 1; } 14.2857% { opacity: 1; } 14.2857% { opacity: 0.3; } 21.4286% { opacity: 0.3; } 21.4286% { opacity: 0.3; } 28.5714% { opacity: 0.3; } 28.5714% { opacity: 0.3; } 35.7143% { opacity: 0.3; } 35.7143% { opacity: 0.3; } 42.8571% { opacity: 0.3; } 42.8571% { opacity: 0.3; } 50% { opacity: 0.3; } 50% { opacity: 0.3; } 57.1429% { opac }
+@keyframes grid-dot-4-4-upDown { 0% { opacity: 0.3; } 7.14286% { opacity: 0.3; } 7.14286% { opacity: 0.3; } 14.2857% { opacity: 0.3; } 14.2857% { opacity: 0.3; } 21.4286% { opacity: 0.3; } 21.4286% { opacity: 0.3; } 28.5714% { opacity: 0.3; } 28.5714% { opacity: 0.3; } 35.7143% { opacity: 0.3; } 35.7143% { opacity: 0.3; } 42.8571% { opacity: 0.3; } 42.8571% { opacity: 0.3; } 50% { opacity: 0.3; } 50% { opacity: 0.3; } 57.1429% {  }
+@keyframes grid-dot-0-0-pong { 0% { opacity: 0.3; } 12.5% { opacity: 0.3; } 12.5% { opacity: 0.3; } 25% { opacity: 0.3; } 25% { opacity: 0.3; } 37.5% { opacity: 0.3; } 37.5% { opacity: 0.3; } 50% { opacity: 0.3; } 50% { opacity: 1; } 62.5% { opacity: 1; } 62.5% { opacity: 1; } 75% { opacity: 1; } 75% { opacity: 1; } 87.5% { opacity: 1; } 87.5% { opacity: 0.3; } 100% { opacity: 0.3; } }
+@keyframes grid-dot-0-1-pong { 0% { opacity: 0.3; } 12.5% { opacity: 0.3; } 12.5% { opacity: 0.3; } 25% { opacity: 0.3; } 25% { opacity: 0.3; } 37.5% { opacity: 0.3; } 37.5% { opacity: 0.3; } 50% { opacity: 0.3; } 50% { opacity: 0.3; } 62.5% { opacity: 0.3; } 62.5% { opacity: 0.3; } 75% { opacity: 0.3; } 75% { opacity: 0.3; } 87.5% { opacity: 0.3; } 87.5% { opacity: 0.3; } 100% { opacity: 0.3; } }
+@keyframes grid-dot-0-2-pong { 0% { opacity: 0.3; } 12.5% { opacity: 0.3; } 12.5% { opacity: 0.3; } 25% { opacity: 0.3; } 25% { opacity: 0.3; } 37.5% { opacity: 0.3; } 37.5% { opacity: 0.3; } 50% { opacity: 0.3; } 50% { opacity: 0.3; } 62.5% { opacity: 0.3; } 62.5% { opacity: 0.3; } 75% { opacity: 0.3; } 75% { opacity: 0.3; } 87.5% { opacity: 0.3; } 87.5% { opacity: 0.3; } 100% { opacity: 0.3; } }
+@keyframes grid-dot-0-3-pong { 0% { opacity: 0.3; } 12.5% { opacity: 0.3; } 12.5% { opacity: 0.3; } 25% { opacity: 0.3; } 25% { opacity: 0.3; } 37.5% { opacity: 0.3; } 37.5% { opacity: 0.3; } 50% { opacity: 0.3; } 50% { opacity: 0.3; } 62.5% { opacity: 0.3; } 62.5% { opacity: 0.3; } 75% { opacity: 0.3; } 75% { opacity: 1; } 87.5% { opacity: 1; } 87.5% { opacity: 0.3; } 100% { opacity: 0.3; } }
+@keyframes grid-dot-0-4-pong { 0% { opacity: 0.3; } 12.5% { opacity: 0.3; } 12.5% { opacity: 0.3; } 25% { opacity: 0.3; } 25% { opacity: 0.3; } 37.5% { opacity: 0.3; } 37.5% { opacity: 0.3; } 50% { opacity: 0.3; } 50% { opacity: 0.3; } 62.5% { opacity: 0.3; } 62.5% { opacity: 0.3; } 75% { opacity: 0.3; } 75% { opacity: 1; } 87.5% { opacity: 1; } 87.5% { opacity: 1; } 100% { opacity: 1; } }
+@keyframes grid-dot-1-0-pong { 0% { opacity: 1; } 12.5% { opacity: 1; } 12.5% { opacity: 1; } 25% { opacity: 1; } 25% { opacity: 1; } 37.5% { opacity: 1; } 37.5% { opacity: 1; } 50% { opacity: 1; } 50% { opacity: 1; } 62.5% { opacity: 1; } 62.5% { opacity: 1; } 75% { opacity: 1; } 75% { opacity: 1; } 87.5% { opacity: 1; } 87.5% { opacity: 1; } 100% { opacity: 1; } }
+@keyframes grid-dot-1-1-pong { 0% { opacity: 0.3; } 12.5% { opacity: 0.3; } 12.5% { opacity: 0.3; } 25% { opacity: 0.3; } 25% { opacity: 0.3; } 37.5% { opacity: 0.3; } 37.5% { opacity: 0.3; } 50% { opacity: 0.3; } 50% { opacity: 0.3; } 62.5% { opacity: 0.3; } 62.5% { opacity: 0.3; } 75% { opacity: 0.3; } 75% { opacity: 0.3; } 87.5% { opacity: 0.3; } 87.5% { opacity: 0.3; } 100% { opacity: 0.3; } }
+@keyframes grid-dot-1-2-pong { 0% { opacity: 0.3; } 12.5% { opacity: 0.3; } 12.5% { opacity: 0.3; } 25% { opacity: 0.3; } 25% { opacity: 0.3; } 37.5% { opacity: 0.3; } 37.5% { opacity: 0.3; } 50% { opacity: 0.3; } 50% { opacity: 0.3; } 62.5% { opacity: 0.3; } 62.5% { opacity: 1; } 75% { opacity: 1; } 75% { opacity: 0.3; } 87.5% { opacity: 0.3; } 87.5% { opacity: 1; } 100% { opacity: 1; } }
+@keyframes grid-dot-1-3-pong { 0% { opacity: 0.3; } 12.5% { opacity: 0.3; } 12.5% { opacity: 0.3; } 25% { opacity: 0.3; } 25% { opacity: 0.3; } 37.5% { opacity: 0.3; } 37.5% { opacity: 0.3; } 50% { opacity: 0.3; } 50% { opacity: 0.3; } 62.5% { opacity: 0.3; } 62.5% { opacity: 0.3; } 75% { opacity: 0.3; } 75% { opacity: 0.3; } 87.5% { opacity: 0.3; } 87.5% { opacity: 0.3; } 100% { opacity: 0.3; } }
+@keyframes grid-dot-1-4-pong { 0% { opacity: 1; } 12.5% { opacity: 1; } 12.5% { opacity: 0.3; } 25% { opacity: 0.3; } 25% { opacity: 0.3; } 37.5% { opacity: 0.3; } 37.5% { opacity: 0.3; } 50% { opacity: 0.3; } 50% { opacity: 0.3; } 62.5% { opacity: 0.3; } 62.5% { opacity: 1; } 75% { opacity: 1; } 75% { opacity: 1; } 87.5% { opacity: 1; } 87.5% { opacity: 1; } 100% { opacity: 1; } }
+@keyframes grid-dot-2-0-pong { 0% { opacity: 1; } 12.5% { opacity: 1; } 12.5% { opacity: 1; } 25% { opacity: 1; } 25% { opacity: 1; } 37.5% { opacity: 1; } 37.5% { opacity: 1; } 50% { opacity: 1; } 50% { opacity: 1; } 62.5% { opacity: 1; } 62.5% { opacity: 1; } 75% { opacity: 1; } 75% { opacity: 1; } 87.5% { opacity: 1; } 87.5% { opacity: 1; } 100% { opacity: 1; } }
+@keyframes grid-dot-2-1-pong { 0% { opacity: 1; } 12.5% { opacity: 1; } 12.5% { opacity: 0.3; } 25% { opacity: 0.3; } 25% { opacity: 0.3; } 37.5% { opacity: 0.3; } 37.5% { opacity: 0.3; } 50% { opacity: 0.3; } 50% { opacity: 1; } 62.5% { opacity: 1; } 62.5% { opacity: 0.3; } 75% { opacity: 0.3; } 75% { opacity: 0.3; } 87.5% { opacity: 0.3; } 87.5% { opacity: 0.3; } 100% { opacity: 0.3; } }
+@keyframes grid-dot-2-2-pong { 0% { opacity: 0.3; } 12.5% { opacity: 0.3; } 12.5% { opacity: 0.3; } 25% { opacity: 0.3; } 25% { opacity: 0.3; } 37.5% { opacity: 0.3; } 37.5% { opacity: 0.3; } 50% { opacity: 0.3; } 50% { opacity: 0.3; } 62.5% { opacity: 0.3; } 62.5% { opacity: 0.3; } 75% { opacity: 0.3; } 75% { opacity: 0.3; } 87.5% { opacity: 0.3; } 87.5% { opacity: 0.3; } 100% { opacity: 0.3; } }
+@keyframes grid-dot-2-3-pong { 0% { opacity: 0.3; } 12.5% { opacity: 0.3; } 12.5% { opacity: 0.3; } 25% { opacity: 0.3; } 25% { opacity: 0.3; } 37.5% { opacity: 0.3; } 37.5% { opacity: 0.3; } 50% { opacity: 0.3; } 50% { opacity: 0.3; } 62.5% { opacity: 0.3; } 62.5% { opacity: 0.3; } 75% { opacity: 0.3; } 75% { opacity: 0.3; } 87.5% { opacity: 0.3; } 87.5% { opacity: 0.3; } 100% { opacity: 0.3; } }
+@keyframes grid-dot-2-4-pong { 0% { opacity: 1; } 12.5% { opacity: 1; } 12.5% { opacity: 1; } 25% { opacity: 1; } 25% { opacity: 1; } 37.5% { opacity: 1; } 37.5% { opacity: 1; } 50% { opacity: 1; } 50% { opacity: 1; } 62.5% { opacity: 1; } 62.5% { opacity: 1; } 75% { opacity: 1; } 75% { opacity: 1; } 87.5% { opacity: 1; } 87.5% { opacity: 1; } 100% { opacity: 1; } }
+@keyframes grid-dot-3-0-pong { 0% { opacity: 1; } 12.5% { opacity: 1; } 12.5% { opacity: 1; } 25% { opacity: 1; } 25% { opacity: 1; } 37.5% { opacity: 1; } 37.5% { opacity: 1; } 50% { opacity: 1; } 50% { opacity: 0.3; } 62.5% { opacity: 0.3; } 62.5% { opacity: 0.3; } 75% { opacity: 0.3; } 75% { opacity: 0.3; } 87.5% { opacity: 0.3; } 87.5% { opacity: 1; } 100% { opacity: 1; } }
+@keyframes grid-dot-3-1-pong { 0% { opacity: 0.3; } 12.5% { opacity: 0.3; } 12.5% { opacity: 0.3; } 25% { opacity: 0.3; } 25% { opacity: 0.3; } 37.5% { opacity: 0.3; } 37.5% { opacity: 0.3; } 50% { opacity: 0.3; } 50% { opacity: 0.3; } 62.5% { opacity: 0.3; } 62.5% { opacity: 0.3; } 75% { opacity: 0.3; } 75% { opacity: 0.3; } 87.5% { opacity: 0.3; } 87.5% { opacity: 0.3; } 100% { opacity: 0.3; } }
+@keyframes grid-dot-3-2-pong { 0% { opacity: 0.3; } 12.5% { opacity: 0.3; } 12.5% { opacity: 1; } 25% { opacity: 1; } 25% { opacity: 0.3; } 37.5% { opacity: 0.3; } 37.5% { opacity: 1; } 50% { opacity: 1; } 50% { opacity: 0.3; } 62.5% { opacity: 0.3; } 62.5% { opacity: 0.3; } 75% { opacity: 0.3; } 75% { opacity: 0.3; } 87.5% { opacity: 0.3; } 87.5% { opacity: 0.3; } 100% { opacity: 0.3; } }
+@keyframes grid-dot-3-3-pong { 0% { opacity: 0.3; } 12.5% { opacity: 0.3; } 12.5% { opacity: 0.3; } 25% { opacity: 0.3; } 25% { opacity: 0.3; } 37.5% { opacity: 0.3; } 37.5% { opacity: 0.3; } 50% { opacity: 0.3; } 50% { opacity: 0.3; } 62.5% { opacity: 0.3; } 62.5% { opacity: 0.3; } 75% { opacity: 0.3; } 75% { opacity: 0.3; } 87.5% { opacity: 0.3; } 87.5% { opacity: 0.3; } 100% { opacity: 0.3; } }
+@keyframes grid-dot-3-4-pong { 0% { opacity: 1; } 12.5% { opacity: 1; } 12.5% { opacity: 1; } 25% { opacity: 1; } 25% { opacity: 1; } 37.5% { opacity: 1; } 37.5% { opacity: 1; } 50% { opacity: 1; } 50% { opacity: 1; } 62.5% { opacity: 1; } 62.5% { opacity: 1; } 75% { opacity: 1; } 75% { opacity: 0.3; } 87.5% { opacity: 0.3; } 87.5% { opacity: 0.3; } 100% { opacity: 0.3; } }
+@keyframes grid-dot-4-0-pong { 0% { opacity: 0.3; } 12.5% { opacity: 0.3; } 12.5% { opacity: 0.3; } 25% { opacity: 0.3; } 25% { opacity: 0.3; } 37.5% { opacity: 0.3; } 37.5% { opacity: 0.3; } 50% { opacity: 0.3; } 50% { opacity: 0.3; } 62.5% { opacity: 0.3; } 62.5% { opacity: 0.3; } 75% { opacity: 0.3; } 75% { opacity: 0.3; } 87.5% { opacity: 0.3; } 87.5% { opacity: 0.3; } 100% { opacity: 0.3; } }
+@keyframes grid-dot-4-1-pong { 0% { opacity: 0.3; } 12.5% { opacity: 0.3; } 12.5% { opacity: 0.3; } 25% { opacity: 0.3; } 25% { opacity: 0.3; } 37.5% { opacity: 0.3; } 37.5% { opacity: 0.3; } 50% { opacity: 0.3; } 50% { opacity: 0.3; } 62.5% { opacity: 0.3; } 62.5% { opacity: 0.3; } 75% { opacity: 0.3; } 75% { opacity: 0.3; } 87.5% { opacity: 0.3; } 87.5% { opacity: 0.3; } 100% { opacity: 0.3; } }
+@keyframes grid-dot-4-2-pong { 0% { opacity: 0.3; } 12.5% { opacity: 0.3; } 12.5% { opacity: 0.3; } 25% { opacity: 0.3; } 25% { opacity: 0.3; } 37.5% { opacity: 0.3; } 37.5% { opacity: 0.3; } 50% { opacity: 0.3; } 50% { opacity: 0.3; } 62.5% { opacity: 0.3; } 62.5% { opacity: 0.3; } 75% { opacity: 0.3; } 75% { opacity: 0.3; } 87.5% { opacity: 0.3; } 87.5% { opacity: 0.3; } 100% { opacity: 0.3; } }
+@keyframes grid-dot-4-3-pong { 0% { opacity: 0.3; } 12.5% { opacity: 0.3; } 12.5% { opacity: 0.3; } 25% { opacity: 0.3; } 25% { opacity: 1; } 37.5% { opacity: 1; } 37.5% { opacity: 0.3; } 50% { opacity: 0.3; } 50% { opacity: 0.3; } 62.5% { opacity: 0.3; } 62.5% { opacity: 0.3; } 75% { opacity: 0.3; } 75% { opacity: 0.3; } 87.5% { opacity: 0.3; } 87.5% { opacity: 0.3; } 100% { opacity: 0.3; } }
+@keyframes grid-dot-4-4-pong { 0% { opacity: 0.3; } 12.5% { opacity: 0.3; } 12.5% { opacity: 1; } 25% { opacity: 1; } 25% { opacity: 1; } 37.5% { opacity: 1; } 37.5% { opacity: 1; } 50% { opacity: 1; } 50% { opacity: 1; } 62.5% { opacity: 1; } 62.5% { opacity: 0.3; } 75% { opacity: 0.3; } 75% { opacity: 0.3; } 87.5% { opacity: 0.3; } 87.5% { opacity: 0.3; } 100% { opacity: 0.3; } }
+@keyframes grid-dot-0-0-agent { 0% { opacity: 1; } 6.25% { opacity: 1; } 6.25% { opacity: 1; } 12.5% { opacity: 1; } 12.5% { opacity: 1; } 18.75% { opacity: 1; } 18.75% { opacity: 1; } 25% { opacity: 1; } 25% { opacity: 1; } 31.25% { opacity: 1; } 31.25% { opacity: 1; } 37.5% { opacity: 1; } 37.5% { opacity: 1; } 43.75% { opacity: 1; } 43.75% { opacity: 1; } 50% { opacity: 1; } 50% { opacity: 1; } 56.25% { opacity: 1; } 56.25% { }
+@keyframes grid-dot-0-1-agent { 0% { opacity: 0.3; } 6.25% { opacity: 0.3; } 6.25% { opacity: 1; } 12.5% { opacity: 1; } 12.5% { opacity: 1; } 18.75% { opacity: 1; } 18.75% { opacity: 1; } 25% { opacity: 1; } 25% { opacity: 1; } 31.25% { opacity: 1; } 31.25% { opacity: 1; } 37.5% { opacity: 1; } 37.5% { opacity: 1; } 43.75% { opacity: 1; } 43.75% { opacity: 1; } 50% { opacity: 1; } 50% { opacity: 1; } 56.25% { opacity: 1; } 56.2 }
+@keyframes grid-dot-0-2-agent { 0% { opacity: 0.3; } 6.25% { opacity: 0.3; } 6.25% { opacity: 0.3; } 12.5% { opacity: 0.3; } 12.5% { opacity: 1; } 18.75% { opacity: 1; } 18.75% { opacity: 1; } 25% { opacity: 1; } 25% { opacity: 1; } 31.25% { opacity: 1; } 31.25% { opacity: 1; } 37.5% { opacity: 1; } 37.5% { opacity: 1; } 43.75% { opacity: 1; } 43.75% { opacity: 1; } 50% { opacity: 1; } 50% { opacity: 1; } 56.25% { opacity: 1; }  }
+@keyframes grid-dot-0-3-agent { 0% { opacity: 0.3; } 6.25% { opacity: 0.3; } 6.25% { opacity: 0.3; } 12.5% { opacity: 0.3; } 12.5% { opacity: 0.3; } 18.75% { opacity: 0.3; } 18.75% { opacity: 0.3; } 25% { opacity: 0.3; } 25% { opacity: 0.3; } 31.25% { opacity: 0.3; } 31.25% { opacity: 0.3; } 37.5% { opacity: 0.3; } 37.5% { opacity: 0.3; } 43.75% { opacity: 0.3; } 43.75% { opacity: 0.3; } 50% { opacity: 0.3; } 50% { opacity: 0.3; }
+@keyframes grid-dot-0-4-agent { 0% { opacity: 0.3; } 6.25% { opacity: 0.3; } 6.25% { opacity: 0.3; } 12.5% { opacity: 0.3; } 12.5% { opacity: 0.3; } 18.75% { opacity: 0.3; } 18.75% { opacity: 0.3; } 25% { opacity: 0.3; } 25% { opacity: 0.3; } 31.25% { opacity: 0.3; } 31.25% { opacity: 0.3; } 37.5% { opacity: 0.3; } 37.5% { opacity: 0.3; } 43.75% { opacity: 0.3; } 43.75% { opacity: 0.3; } 50% { opacity: 0.3; } 50% { opacity: 0.3; }
+@keyframes grid-dot-1-0-agent { 0% { opacity: 0.3; } 6.25% { opacity: 0.3; } 6.25% { opacity: 0.3; } 12.5% { opacity: 0.3; } 12.5% { opacity: 0.3; } 18.75% { opacity: 0.3; } 18.75% { opacity: 1; } 25% { opacity: 1; } 25% { opacity: 1; } 31.25% { opacity: 1; } 31.25% { opacity: 1; } 37.5% { opacity: 1; } 37.5% { opacity: 1; } 43.75% { opacity: 1; } 43.75% { opacity: 1; } 50% { opacity: 1; } 50% { opacity: 1; } 56.25% { opacity: 1 }
+@keyframes grid-dot-1-1-agent { 0% { opacity: 0.3; } 6.25% { opacity: 0.3; } 6.25% { opacity: 0.3; } 12.5% { opacity: 0.3; } 12.5% { opacity: 0.3; } 18.75% { opacity: 0.3; } 18.75% { opacity: 0.3; } 25% { opacity: 0.3; } 25% { opacity: 1; } 31.25% { opacity: 1; } 31.25% { opacity: 1; } 37.5% { opacity: 1; } 37.5% { opacity: 1; } 43.75% { opacity: 1; } 43.75% { opacity: 1; } 50% { opacity: 1; } 50% { opacity: 1; } 56.25% { opacit }
+@keyframes grid-dot-1-2-agent { 0% { opacity: 0.3; } 6.25% { opacity: 0.3; } 6.25% { opacity: 0.3; } 12.5% { opacity: 0.3; } 12.5% { opacity: 0.3; } 18.75% { opacity: 0.3; } 18.75% { opacity: 0.3; } 25% { opacity: 0.3; } 25% { opacity: 0.3; } 31.25% { opacity: 0.3; } 31.25% { opacity: 1; } 37.5% { opacity: 1; } 37.5% { opacity: 1; } 43.75% { opacity: 1; } 43.75% { opacity: 1; } 50% { opacity: 1; } 50% { opacity: 1; } 56.25% { op }
+@keyframes grid-dot-1-3-agent { 0% { opacity: 0.3; } 6.25% { opacity: 0.3; } 6.25% { opacity: 0.3; } 12.5% { opacity: 0.3; } 12.5% { opacity: 0.3; } 18.75% { opacity: 0.3; } 18.75% { opacity: 0.3; } 25% { opacity: 0.3; } 25% { opacity: 0.3; } 31.25% { opacity: 0.3; } 31.25% { opacity: 0.3; } 37.5% { opacity: 0.3; } 37.5% { opacity: 1; } 43.75% { opacity: 1; } 43.75% { opacity: 1; } 50% { opacity: 1; } 50% { opacity: 1; } 56.25%  }
+@keyframes grid-dot-1-4-agent { 0% { opacity: 0.3; } 6.25% { opacity: 0.3; } 6.25% { opacity: 0.3; } 12.5% { opacity: 0.3; } 12.5% { opacity: 0.3; } 18.75% { opacity: 0.3; } 18.75% { opacity: 0.3; } 25% { opacity: 0.3; } 25% { opacity: 0.3; } 31.25% { opacity: 0.3; } 31.25% { opacity: 0.3; } 37.5% { opacity: 0.3; } 37.5% { opacity: 0.3; } 43.75% { opacity: 0.3; } 43.75% { opacity: 0.3; } 50% { opacity: 0.3; } 50% { opacity: 0.3; }
+@keyframes grid-dot-2-0-agent { 0% { opacity: 0.3; } 6.25% { opacity: 0.3; } 6.25% { opacity: 0.3; } 12.5% { opacity: 0.3; } 12.5% { opacity: 0.3; } 18.75% { opacity: 0.3; } 18.75% { opacity: 0.3; } 25% { opacity: 0.3; } 25% { opacity: 0.3; } 31.25% { opacity: 0.3; } 31.25% { opacity: 0.3; } 37.5% { opacity: 0.3; } 37.5% { opacity: 0.3; } 43.75% { opacity: 0.3; } 43.75% { opacity: 1; } 50% { opacity: 1; } 50% { opacity: 1; } 56. }
+@keyframes grid-dot-2-1-agent { 0% { opacity: 0.3; } 6.25% { opacity: 0.3; } 6.25% { opacity: 0.3; } 12.5% { opacity: 0.3; } 12.5% { opacity: 0.3; } 18.75% { opacity: 0.3; } 18.75% { opacity: 0.3; } 25% { opacity: 0.3; } 25% { opacity: 0.3; } 31.25% { opacity: 0.3; } 31.25% { opacity: 0.3; } 37.5% { opacity: 0.3; } 37.5% { opacity: 0.3; } 43.75% { opacity: 0.3; } 43.75% { opacity: 0.3; } 50% { opacity: 0.3; } 50% { opacity: 1; } }
+@keyframes grid-dot-2-2-agent { 0% { opacity: 0.3; } 6.25% { opacity: 0.3; } 6.25% { opacity: 0.3; } 12.5% { opacity: 0.3; } 12.5% { opacity: 0.3; } 18.75% { opacity: 0.3; } 18.75% { opacity: 0.3; } 25% { opacity: 0.3; } 25% { opacity: 0.3; } 31.25% { opacity: 0.3; } 31.25% { opacity: 0.3; } 37.5% { opacity: 0.3; } 37.5% { opacity: 0.3; } 43.75% { opacity: 0.3; } 43.75% { opacity: 0.3; } 50% { opacity: 0.3; } 50% { opacity: 0.3; }
+@keyframes grid-dot-2-3-agent { 0% { opacity: 0.3; } 6.25% { opacity: 0.3; } 6.25% { opacity: 0.3; } 12.5% { opacity: 0.3; } 12.5% { opacity: 0.3; } 18.75% { opacity: 0.3; } 18.75% { opacity: 0.3; } 25% { opacity: 0.3; } 25% { opacity: 0.3; } 31.25% { opacity: 0.3; } 31.25% { opacity: 0.3; } 37.5% { opacity: 0.3; } 37.5% { opacity: 0.3; } 43.75% { opacity: 0.3; } 43.75% { opacity: 0.3; } 50% { opacity: 0.3; } 50% { opacity: 0.3; }
+@keyframes grid-dot-2-4-agent { 0% { opacity: 0.3; } 6.25% { opacity: 0.3; } 6.25% { opacity: 0.3; } 12.5% { opacity: 0.3; } 12.5% { opacity: 0.3; } 18.75% { opacity: 0.3; } 18.75% { opacity: 0.3; } 25% { opacity: 0.3; } 25% { opacity: 0.3; } 31.25% { opacity: 0.3; } 31.25% { opacity: 0.3; } 37.5% { opacity: 0.3; } 37.5% { opacity: 0.3; } 43.75% { opacity: 0.3; } 43.75% { opacity: 0.3; } 50% { opacity: 0.3; } 50% { opacity: 0.3; }
+@keyframes grid-dot-3-0-agent { 0% { opacity: 0.3; } 6.25% { opacity: 0.3; } 6.25% { opacity: 0.3; } 12.5% { opacity: 0.3; } 12.5% { opacity: 0.3; } 18.75% { opacity: 0.3; } 18.75% { opacity: 0.3; } 25% { opacity: 0.3; } 25% { opacity: 0.3; } 31.25% { opacity: 0.3; } 31.25% { opacity: 0.3; } 37.5% { opacity: 0.3; } 37.5% { opacity: 0.3; } 43.75% { opacity: 0.3; } 43.75% { opacity: 0.3; } 50% { opacity: 0.3; } 50% { opacity: 0.3; }
+@keyframes grid-dot-3-1-agent { 0% { opacity: 0.3; } 6.25% { opacity: 0.3; } 6.25% { opacity: 0.3; } 12.5% { opacity: 0.3; } 12.5% { opacity: 0.3; } 18.75% { opacity: 0.3; } 18.75% { opacity: 0.3; } 25% { opacity: 0.3; } 25% { opacity: 0.3; } 31.25% { opacity: 0.3; } 31.25% { opacity: 0.3; } 37.5% { opacity: 0.3; } 37.5% { opacity: 0.3; } 43.75% { opacity: 0.3; } 43.75% { opacity: 0.3; } 50% { opacity: 0.3; } 50% { opacity: 0.3; }
+@keyframes grid-dot-3-2-agent { 0% { opacity: 0.3; } 6.25% { opacity: 0.3; } 6.25% { opacity: 0.3; } 12.5% { opacity: 0.3; } 12.5% { opacity: 0.3; } 18.75% { opacity: 0.3; } 18.75% { opacity: 0.3; } 25% { opacity: 0.3; } 25% { opacity: 0.3; } 31.25% { opacity: 0.3; } 31.25% { opacity: 0.3; } 37.5% { opacity: 0.3; } 37.5% { opacity: 0.3; } 43.75% { opacity: 0.3; } 43.75% { opacity: 0.3; } 50% { opacity: 0.3; } 50% { opacity: 0.3; }
+@keyframes grid-dot-3-3-agent { 0% { opacity: 0.3; } 6.25% { opacity: 0.3; } 6.25% { opacity: 0.3; } 12.5% { opacity: 0.3; } 12.5% { opacity: 0.3; } 18.75% { opacity: 0.3; } 18.75% { opacity: 0.3; } 25% { opacity: 0.3; } 25% { opacity: 0.3; } 31.25% { opacity: 0.3; } 31.25% { opacity: 0.3; } 37.5% { opacity: 0.3; } 37.5% { opacity: 0.3; } 43.75% { opacity: 0.3; } 43.75% { opacity: 0.3; } 50% { opacity: 0.3; } 50% { opacity: 0.3; }
+@keyframes grid-dot-3-4-agent { 0% { opacity: 0.3; } 6.25% { opacity: 0.3; } 6.25% { opacity: 0.3; } 12.5% { opacity: 0.3; } 12.5% { opacity: 0.3; } 18.75% { opacity: 0.3; } 18.75% { opacity: 0.3; } 25% { opacity: 0.3; } 25% { opacity: 0.3; } 31.25% { opacity: 0.3; } 31.25% { opacity: 0.3; } 37.5% { opacity: 0.3; } 37.5% { opacity: 0.3; } 43.75% { opacity: 0.3; } 43.75% { opacity: 0.3; } 50% { opacity: 0.3; } 50% { opacity: 0.3; }
+@keyframes grid-dot-4-0-agent { 0% { opacity: 0.3; } 6.25% { opacity: 0.3; } 6.25% { opacity: 0.3; } 12.5% { opacity: 0.3; } 12.5% { opacity: 0.3; } 18.75% { opacity: 0.3; } 18.75% { opacity: 0.3; } 25% { opacity: 0.3; } 25% { opacity: 0.3; } 31.25% { opacity: 0.3; } 31.25% { opacity: 0.3; } 37.5% { opacity: 0.3; } 37.5% { opacity: 0.3; } 43.75% { opacity: 0.3; } 43.75% { opacity: 0.3; } 50% { opacity: 0.3; } 50% { opacity: 0.3; }
+@keyframes grid-dot-4-1-agent { 0% { opacity: 0.3; } 6.25% { opacity: 0.3; } 6.25% { opacity: 0.3; } 12.5% { opacity: 0.3; } 12.5% { opacity: 0.3; } 18.75% { opacity: 0.3; } 18.75% { opacity: 0.3; } 25% { opacity: 0.3; } 25% { opacity: 0.3; } 31.25% { opacity: 0.3; } 31.25% { opacity: 0.3; } 37.5% { opacity: 0.3; } 37.5% { opacity: 0.3; } 43.75% { opacity: 0.3; } 43.75% { opacity: 0.3; } 50% { opacity: 0.3; } 50% { opacity: 0.3; }
+@keyframes grid-dot-4-2-agent { 0% { opacity: 0.3; } 6.25% { opacity: 0.3; } 6.25% { opacity: 0.3; } 12.5% { opacity: 0.3; } 12.5% { opacity: 0.3; } 18.75% { opacity: 0.3; } 18.75% { opacity: 0.3; } 25% { opacity: 0.3; } 25% { opacity: 0.3; } 31.25% { opacity: 0.3; } 31.25% { opacity: 0.3; } 37.5% { opacity: 0.3; } 37.5% { opacity: 0.3; } 43.75% { opacity: 0.3; } 43.75% { opacity: 0.3; } 50% { opacity: 0.3; } 50% { opacity: 0.3; }
+@keyframes grid-dot-4-3-agent { 0% { opacity: 0.3; } 6.25% { opacity: 0.3; } 6.25% { opacity: 0.3; } 12.5% { opacity: 0.3; } 12.5% { opacity: 0.3; } 18.75% { opacity: 0.3; } 18.75% { opacity: 0.3; } 25% { opacity: 0.3; } 25% { opacity: 0.3; } 31.25% { opacity: 0.3; } 31.25% { opacity: 0.3; } 37.5% { opacity: 0.3; } 37.5% { opacity: 0.3; } 43.75% { opacity: 0.3; } 43.75% { opacity: 0.3; } 50% { opacity: 0.3; } 50% { opacity: 0.3; }
+@keyframes grid-dot-4-4-agent { 0% { opacity: 0.3; } 6.25% { opacity: 0.3; } 6.25% { opacity: 0.3; } 12.5% { opacity: 0.3; } 12.5% { opacity: 0.3; } 18.75% { opacity: 0.3; } 18.75% { opacity: 0.3; } 25% { opacity: 0.3; } 25% { opacity: 0.3; } 31.25% { opacity: 0.3; } 31.25% { opacity: 0.3; } 37.5% { opacity: 0.3; } 37.5% { opacity: 0.3; } 43.75% { opacity: 0.3; } 43.75% { opacity: 0.3; } 50% { opacity: 0.3; } 50% { opacity: 0.3; }
+@keyframes swipe-out-left { 0% { transform: var(--y) translateX(var(--swipe-amount-x)); opacity: 1; } 100% { transform: var(--y) translateX(calc(var(--swipe-amount-x) - 100%)); opacity: 0; } }
+@keyframes swipe-out-right { 0% { transform: var(--y) translateX(var(--swipe-amount-x)); opacity: 1; } 100% { transform: var(--y) translateX(calc(var(--swipe-amount-x) + 100%)); opacity: 0; } }
+@keyframes swipe-out-up { 0% { transform: var(--y) translateY(var(--swipe-amount-y)); opacity: 1; } 100% { transform: var(--y) translateY(calc(var(--swipe-amount-y) - 100%)); opacity: 0; } }
+@keyframes swipe-out-down { 0% { transform: var(--y) translateY(var(--swipe-amount-y)); opacity: 1; } 100% { transform: var(--y) translateY(calc(var(--swipe-amount-y) + 100%)); opacity: 0; } }
+@keyframes sonner-fade-in { 0% { opacity: 0; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1); } }
+@keyframes sonner-fade-out { 0% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(0.8); } }
+@keyframes sonner-spin { 0% { opacity: 1; } 100% { opacity: 0.15; } }
+@keyframes fadeIn { 0% { opacity: 0; } 100% { opacity: 1; } }
+@keyframes fadeOut { 100% { opacity: 0; } }
+@keyframes slideFromBottom { 0% { transform: translate3d(0,var(--initial-transform,100%),0); } 100% { transform: translate3d(0px, 0px, 0px); } }
+@keyframes slideToBottom { 100% { transform: translate3d(0,var(--initial-transform,100%),0); } }
+@keyframes slideFromTop { 0% { transform: translate3d(0,calc(var(--initial-transform,100%) * -1),0); } 100% { transform: translate3d(0px, 0px, 0px); } }
+@keyframes slideToTop { 100% { transform: translate3d(0,calc(var(--initial-transform,100%) * -1),0); } }
+@keyframes slideFromLeft { 0% { transform: translate3d(calc(var(--initial-transform,100%) * -1),0,0); } 100% { transform: translate3d(0px, 0px, 0px); } }
+@keyframes slideToLeft { 100% { transform: translate3d(calc(var(--initial-transform,100%) * -1),0,0); } }
+@keyframes slideFromRight { 0% { transform: translate3d(var(--initial-transform,100%),0,0); } 100% { transform: translate3d(0px, 0px, 0px); } }
+@keyframes slideToRight { 100% { transform: translate3d(var(--initial-transform,100%),0,0); } }
+@keyframes PSAPAG_dialogOpen { 0% { opacity: 0; transform: translate(-50%, -49%) scale(0.95); } 100% { opacity: 1; transform: translate(-50%, -50%); } }
+@keyframes PSAPAG_dialogClose { 0% { opacity: 1; transform: translate(-50%, -50%); } 100% { opacity: 0; transform: translate(-50%, -49%) scale(0.95); } }
+@keyframes PSAPAG_fadeIn { 0% { opacity: 0; } 100% { opacity: 1; } }
+@keyframes PSAPAG_fadeOut { 0% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes lAb7VG_highlight { 20%, 80% { background-color: var(--bg); border-color: var(--border); } }
+@keyframes UVNdXW_open { 0% { opacity: 0; transform: scale(0.9); } 100% { opacity: 1; transform: scale(1); } }
+@keyframes UVNdXW_close { 0% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(0.9); } }
+@keyframes rWdRxW_statusFlash { 0% { filter: brightness(); animation-timing-function: var(--ease-out-cubic); } 8% { filter: brightness(1.6); animation-timing-function: var(--ease-out-cubic); } 60%, 100% { filter: brightness(); } }
+@keyframes rWdRxW_statusPulse { 0% { opacity: 0.7; animation-timing-function: var(--ease-out-cubic); transform: scale(0.375); } 60%, 100% { opacity: 0; transform: scale(1); } }
+
+######## @FONT-FACE ########
+
+
+######## NAMED SAMPLES ########
+-- home.json --
+{
+ "label": "h1",
+ "sel": "h1",
+ "tag": "H1",
+ "cls": "sc-KOGVz cVAQDa Fzcv4W_insetLarge QI8oKG_title",
+ "color": "rgb(247, 248, 248)",
+ "background": "rgba(0, 0, 0, 0)",
+ "backgroundImage": "none",
+ "font": "\"Inter Variable\", \"SF Pro Display\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif",
+ "size": "64px",
+ "weight": "510",
+ "lh": "64px",
+ "ls": "-1.408px",
+ "radius": "0px",
+ "shadow": "none",
+ "border": "0px none rgb(247, 248, 248)",
+ "transition": "all 0s ease"
+}
+{
+ "label": "h2",
+ "sel": "h2",
+ "tag": "H2",
+ "cls": "sc-KOGVz jaIwvI Fzcv4W_inset Fzcv4W_insetLarge",
+ "color": "rgb(138, 143, 152)",
+ "background": "rgba(0, 0, 0, 0)",
+ "backgroundImage": "none",
+ "font": "\"Inter Variable\", \"SF Pro Display\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif",
+ "size": "48px",
+ "weight": "510",
+ "lh": "48px",
+ "ls": "-1.056px",
+ "radius": "0px",
+ "shadow": "none",
+ "border": "0px none rgb(138, 143, 152)",
+ "transition": "all 0s ease"
+}
+{
+ "label": "bodytext",
+ "sel": "p",
+ "tag": "P",
+ "cls": "sc-KOGVz jqlWID",
+ "color": "rgb(138, 143, 152)",
+ "background": "rgba(0, 0, 0, 0)",
+ "backgroundImage": "none",
+ "font": "\"Inter Variable\", \"SF Pro Display\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif",
+ "size": "15px",
+ "weight": "400",
+ "lh": "24px",
+ "ls": "-0.165px",
+ "radius": "0px",
+ "shadow": "none",
+ "border": "0px none rgb(138, 143, 152)",
+ "transition": "all 0s ease"
+}
+{
+ "label": "primaryButton",
+ "sel": "a[href*=\"signup\"], button",
+ "tag": "BUTTON",
+ "cls": "TZTsQG_anchor TZTsQG_trigger hCgVwa_reset-button",
+ "color": "rgb(138, 143, 152)",
+ "background": "rgba(0, 0, 0, 0)",
+ "backgroundImage": "none",
+ "font": "\"Inter Variable\", \"SF Pro Display\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif",
+ "size": "13px",
+ "weight": "400",
+ "lh": "19.5px",
+ "ls": "normal",
+ "radius": "9999px",
+ "shadow": "none",
+ "border": "0px none rgb(138, 143, 152)",
+ "transition": "color, background 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+}
+{
+ "label": "card",
+ "sel": "[class*=\"card\"]",
+ "tag": "DIV",
+ "cls": "uPPvIq_cardWrap",
+ "color": "rgb(247, 248, 248)",
+ "background": "rgba(0, 0, 0, 0)",
+ "backgroundImage": "none",
+ "font": "\"Inter Variable\", \"SF Pro Display\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif",
+ "size": "16px",
+ "weight": "400",
+ "lh": "24px",
+ "ls": "normal",
+ "radius": "0px",
+ "shadow": "none",
+ "border": "0px none rgb(247, 248, 248)",
+ "transition": "all 0s ease"
+}
+{
+ "label": "header",
+ "sel": "header",
+ "tag": "HEADER",
+ "cls": "TZTsQG_header TZTsQG_header",
+ "color": "rgb(247, 248, 248)",
+ "background": "rgba(0, 0, 0, 0)",
+ "backgroundImage": "linear-gradient(rgba(11, 11, 11, 0.8) 0%, oklab(0.149576 0.00000680983 0.00000298768 / 0.761905) 100%)",
+ "font": "\"Inter Variable\", \"SF Pro Display\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif",
+ "size": "16px",
+ "weight": "400",
+ "lh": "24px",
+ "ls": "normal",
+ "radius": "0px",
+ "shadow": "none",
+ "border": "0px none rgb(247, 248, 248)",
+ "transition": "border-color, background 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+}
+-- product-build.json --
+{
+ "label": "h1",
+ "sel": "h1",
+ "tag": "H1",
+ "cls": "sc-KOGVz ddXKvS Fzcv4W_insetLarge _4YXZSa_heading",
+ "color": "rgb(247, 248, 248)",
+ "background": "rgba(0, 0, 0, 0)",
+ "backgroundImage": "none",
+ "font": "\"Inter Variable\", \"SF Pro Display\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif",
+ "size": "72px",
+ "weight": "500",
+ "lh": "72px",
+ "ls": "-1.584px",
+ "radius": "0px",
+ "shadow": "none",
+ "border": "0px none rgb(247, 248, 248)",
+ "transition": "all 0s ease"
+}
+{
+ "label": "h2",
+ "sel": "h2",
+ "tag": "H2",
+ "cls": "sc-KOGVz lmPTvT b-30Va_title",
+ "color": "rgb(247, 248, 248)",
+ "background": "rgba(0, 0, 0, 0)",
+ "backgroundImage": "none",
+ "font": "\"Inter Variable\", \"SF Pro Display\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif",
+ "size": "48px",
+ "weight": "510",
+ "lh": "48px",
+ "ls": "-1.056px",
+ "radius": "0px",
+ "shadow": "none",
+ "border": "0px none rgb(247, 248, 248)",
+ "transition": "all 0s ease"
+}
+{
+ "label": "bodytext",
+ "sel": "p",
+ "tag": "P",
+ "cls": "sc-KOGVz dqPSFs show-mobile",
+ "color": "rgb(138, 143, 152)",
+ "background": "rgba(0, 0, 0, 0)",
+ "backgroundImage": "none",
+ "font": "\"Inter Variable\", \"SF Pro Display\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif",
+ "size": "13px",
+ "weight": "400",
+ "lh": "20px",
+ "ls": "normal",
+ "radius": "0px",
+ "shadow": "none",
+ "border": "0px none rgb(138, 143, 152)",
+ "transition": "all 0s ease"
+}
+{
+ "label": "primaryButton",
+ "sel": "a[href*=\"signup\"], button",
+ "tag": "BUTTON",
+ "cls": "TZTsQG_anchor TZTsQG_trigger hCgVwa_reset-button",
+ "color": "rgb(138, 143, 152)",
+ "background": "rgba(0, 0, 0, 0)",
+ "backgroundImage": "none",
+ "font": "\"Inter Variable\", \"SF Pro Display\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif",
+ "size": "13px",
+ "weight": "400",
+ "lh": "19.5px",
+ "ls": "normal",
+ "radius": "9999px",
+ "shadow": "none",
+ "border": "0px none rgb(138, 143, 152)",
+ "transition": "color, background 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+}
+{
+ "label": "card",
+ "sel": "[class*=\"card\"]",
+ "tag": "FIGURE",
+ "cls": "kmKW8a_card kmKW8a_hero ImRUSq_root ImRUSq_column",
+ "color": "rgb(247, 248, 248)",
+ "background": "rgba(0, 0, 0, 0)",
+ "backgroundImage": "url(\"https://linear.app/cdn-cgi/imagedelivery/fO02fVwohEs9s9UHFwon6A/eb981988-eecf-4b40-5500-049641170e00/f=auto,fit=scale-down,metadata=none\")",
+ "font": "\"Inter Variable\", \"SF Pro Display\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif",
+ "size": "16px",
+ "weight": "400",
+ "lh": "24px",
+ "ls": "normal",
+ "radius": "8px",
+ "shadow": "none",
+ "border": "0px none rgb(247, 248, 248)",
+ "transition": "all 0s ease"
+}
+{
+ "label": "header",
+ "sel": "header",
+ "tag": "HEADER",
+ "cls": "TZTsQG_header TZTsQG_header",
+ "color": "rgb(247, 248, 248)",
+ "background": "rgba(0, 0, 0, 0)",
+ "backgroundImage": "linear-gradient(rgba(0, 0, 0, 0) 0%, oklab(0 0 0 / 0) 100%)",
+ "font": "\"Inter Variable\", \"SF Pro Display\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif",
+ "size": "16px",
+ "weight": "400",
+ "lh": "24px",
+ "ls": "normal",
+ "radius": "0px",
+ "shadow": "none",
+ "border": "0px none rgb(247, 248, 248)",
+ "transition": "border-color, background 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+}
+-- product-plan.json --
+{
+ "label": "h1",
+ "sel": "h1",
+ "tag": "H1",
+ "cls": "sc-KOGVz ddXKvS Fzcv4W_insetLarge _4YXZSa_heading",
+ "color": "rgb(247, 248, 248)",
+ "background": "rgba(0, 0, 0, 0)",
+ "backgroundImage": "none",
+ "font": "\"Inter Variable\", \"SF Pro Display\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif",
+ "size": "72px",
+ "weight": "500",
+ "lh": "72px",
+ "ls": "-1.584px",
+ "radius": "0px",
+ "shadow": "none",
+ "border": "0px none rgb(247, 248, 248)",
+ "transition": "all 0s ease"
+}
+{
+ "label": "h2",
+ "sel": "h2",
+ "tag": "H2",
+ "cls": "sc-KOGVz lmPTvT b-30Va_title",
+ "color": "rgb(247, 248, 248)",
+ "background": "rgba(0, 0, 0, 0)",
+ "backgroundImage": "none",
+ "font": "\"Inter Variable\", \"SF Pro Display\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif",
+ "size": "48px",
+ "weight": "510",
+ "lh": "48px",
+ "ls": "-1.056px",
+ "radius": "0px",
+ "shadow": "none",
+ "border": "0px none rgb(247, 248, 248)",
+ "transition": "all 0s ease"
+}
+{
+ "label": "bodytext",
+ "sel": "p",
+ "tag": "P",
+ "cls": "sc-KOGVz dqPSFs show-mobile",
+ "color": "rgb(138, 143, 152)",
+ "background": "rgba(0, 0, 0, 0)",
+ "backgroundImage": "none",
+ "font": "\"Inter Variable\", \"SF Pro Display\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif",
+ "size": "13px",
+ "weight": "400",
+ "lh": "20px",
+ "ls": "normal",
+ "radius": "0px",
+ "shadow": "none",
+ "border": "0px none rgb(138, 143, 152)",
+ "transition": "all 0s ease"
+}
+{
+ "label": "primaryButton",
+ "sel": "a[href*=\"signup\"], button",
+ "tag": "BUTTON",
+ "cls": "TZTsQG_anchor TZTsQG_trigger hCgVwa_reset-button",
+ "color": "rgb(138, 143, 152)",
+ "background": "rgba(0, 0, 0, 0)",
+ "backgroundImage": "none",
+ "font": "\"Inter Variable\", \"SF Pro Display\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif",
+ "size": "13px",
+ "weight": "400",
+ "lh": "19.5px",
+ "ls": "normal",
+ "radius": "9999px",
+ "shadow": "none",
+ "border": "0px none rgb(138, 143, 152)",
+ "transition": "color, background 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+}
+{
+ "label": "card",
+ "sel": "[class*=\"card\"]",
+ "tag": "FIGURE",
+ "cls": "kmKW8a_card kmKW8a_hero ImRUSq_root ImRUSq_column",
+ "color": "rgb(247, 248, 248)",
+ "background": "rgba(0, 0, 0, 0)",
+ "backgroundImage": "url(\"https://linear.app/cdn-cgi/imagedelivery/fO02fVwohEs9s9UHFwon6A/eb981988-eecf-4b40-5500-049641170e00/f=auto,fit=scale-down,metadata=none\")",
+ "font": "\"Inter Variable\", \"SF Pro Display\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif",
+ "size": "16px",
+ "weight": "400",
+ "lh": "24px",
+ "ls": "normal",
+ "radius": "8px",
+ "shadow": "none",
+ "border": "0px none rgb(247, 248, 248)",
+ "transition": "all 0s ease"
+}
+{
+ "label": "header",
+ "sel": "header",
+ "tag": "HEADER",
+ "cls": "TZTsQG_header TZTsQG_header",
+ "color": "rgb(247, 248, 248)",
+ "background": "rgba(0, 0, 0, 0)",
+ "backgroundImage": "linear-gradient(rgba(0, 0, 0, 0) 0%, oklab(0 0 0 / 0) 100%)",
+ "font": "\"Inter Variable\", \"SF Pro Display\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif",
+ "size": "16px",
+ "weight": "400",
+ "lh": "24px",
+ "ls": "normal",
+ "radius": "0px",
+ "shadow": "none",
+ "border": "0px none rgb(247, 248, 248)",
+ "transition": "border-color, background 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+}

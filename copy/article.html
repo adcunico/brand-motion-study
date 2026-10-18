@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Read the Code, Not the Mood Board</title>
+<meta name="description" content="Rebuilding a brand's motion language from its own CSS instead of describing it in adjectives — a design study by Aline Cunico.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* Tokens copied verbatim from ../style/tokens.css (Linear motion study).
+     Unofficial design study. Not affiliated with Linear. */
+  :root{
+    --bg:#010102;
+    --surface-1:#0f1011;
+    --surface-2:#141516;
+    --fg:#f7f8f8;
+    --fg-2:#d0d6e0;
+    --fg-3:#8a8f98;
+    --fg-4:#62666d;
+    --accent:#7170ff;
+    --accent-tint:#18182f;
+    --rule:1px solid rgba(255,255,255,0.08);
+    --radius-8:8px;
+    --radius-12:12px;
+    --radius-16:16px;
+    --shadow-halo:0px 8.576px 12.863px #08090a, 0px 0px 68.604px #08090a;
+    --inset-topline:inset 0 1px 0 0 rgba(255,255,255,0.04);
+    --font:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    --mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,monospace;
+    --tracking-display:-0.022em;
+    --tracking-body:-0.011em;
+    --ease-out-quad:cubic-bezier(.25,.46,.45,.94);
+    --speed-quick:.1s;
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--bg);color:var(--fg-2);
+    font-family:var(--font);font-feature-settings:"cv01","ss03";
+    font-size:17px;line-height:1.72;letter-spacing:var(--tracking-body);
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .shell{max-width:720px;margin:0 auto;padding:0 24px}
+  .wide{max-width:1000px;margin:0 auto;padding:0 24px}
+
+  /* ---------- masthead ---------- */
+  header.top{
+    border-bottom:var(--rule);
+    background:
+      radial-gradient(70% 120% at 50% -10%, rgba(113,112,255,0.13) 0%, rgba(113,112,255,0) 70%),
+      var(--bg);
+  }
+  .top-inner{max-width:720px;margin:0 auto;padding:104px 24px 56px}
+  .kicker{
+    font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;
+    color:var(--fg-4);margin:0 0 24px;
+  }
+  h1{
+    font-size:clamp(40px,6.4vw,64px);font-weight:510;letter-spacing:var(--tracking-display);
+    line-height:1.02;color:var(--fg);margin:0 0 24px;
+  }
+  .standfirst{
+    font-size:21px;line-height:1.56;color:var(--fg-3);margin:0;max-width:34ch;
+  }
+  .byline{
+    display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;
+    margin-top:40px;padding-top:24px;border-top:var(--rule);
+    font-family:var(--mono);font-size:11.5px;color:var(--fg-4);letter-spacing:0;
+  }
+  .byline b{color:var(--fg-2);font-weight:400}
+  .byline .dot{color:rgba(255,255,255,0.18)}
+
+  /* ---------- body ---------- */
+  main{padding:72px 0 0}
+  h2{
+    font-size:30px;font-weight:510;letter-spacing:var(--tracking-display);line-height:1.18;
+    color:var(--fg);margin:72px 0 20px;
+  }
+  h2:first-child{margin-top:0}
+  h3{
+    font-size:19px;font-weight:510;letter-spacing:var(--tracking-body);
+    color:var(--fg);margin:40px 0 10px;
+  }
+  p{margin:0 0 22px}
+  strong{color:var(--fg);font-weight:510}
+  em{color:var(--fg-2)}
+  a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(113,112,255,.3);
+    transition:color var(--speed-quick) var(--ease-out-quad),border-color var(--speed-quick) var(--ease-out-quad)}
+  a:hover{color:#fff;border-bottom-color:rgba(255,255,255,.4)}
+
+  code{
+    font-family:var(--mono);font-size:.86em;color:var(--fg);
+    background:rgba(255,255,255,.055);border:var(--rule);
+    border-radius:4px;padding:1.5px 6px;
+  }
+
+  .lede{font-size:19px;color:var(--fg-2)}
+  .lede::first-letter{
+    float:left;font-size:62px;line-height:.84;font-weight:510;color:var(--fg);
+    padding:4px 12px 0 0;letter-spacing:-0.03em;
+  }
+
+  /* ---------- pull quote ---------- */
+  blockquote{
+    margin:40px 0;padding:0 0 0 24px;border-left:3px solid var(--accent);
+    font-size:21px;line-height:1.5;color:var(--fg);letter-spacing:var(--tracking-display);
+  }
+  blockquote p{margin:0}
+  blockquote cite{
+    display:block;margin-top:12px;font-family:var(--mono);font-size:11px;font-style:normal;
+    color:var(--fg-4);letter-spacing:0;
+  }
+
+  /* ---------- figures ---------- */
+  figure{margin:56px 0}
+  figure.full{max-width:1000px;margin-left:50%;transform:translateX(-50%);padding:0 24px}
+  .shot{
+    border:var(--rule);border-radius:var(--radius-16);overflow:hidden;
+    background:var(--surface-1);box-shadow:var(--shadow-halo),var(--inset-topline);
+    display:block;
+  }
+  .shot img{display:block;width:100%;height:auto}
+  .ph{
+    aspect-ratio:1080/1350;max-height:62vh;display:grid;place-items:center;
+    background:
+      linear-gradient(rgba(255,255,255,0.02),rgba(255,255,255,0.02)),
+      var(--surface-1);
+  }
+  .ph span{font-family:var(--mono);font-size:11px;color:var(--fg-4);letter-spacing:.04em}
+  figcaption{
+    margin-top:14px;font-size:13.5px;color:var(--fg-4);line-height:1.6;
+  }
+  figcaption b{color:var(--fg-3);font-weight:400;font-family:var(--mono);font-size:11px;
+               letter-spacing:.06em;text-transform:uppercase;margin-right:8px}
+
+  /* ---------- step list ---------- */
+  .steps{list-style:none;counter-reset:s;padding:0;margin:32px 0}
+  .steps li{
+    counter-increment:s;position:relative;padding:18px 0 18px 56px;border-top:var(--rule);
+  }
+  .steps li:last-child{border-bottom:var(--rule)}
+  .steps li::before{
+    content:counter(s,decimal-leading-zero);position:absolute;left:0;top:19px;
+    font-family:var(--mono);font-size:11px;color:var(--accent);
+  }
+  .steps b{display:block;color:var(--fg);font-weight:510;margin-bottom:2px}
+
+  /* ---------- prompt block ---------- */
+  .prompt{
+    margin:32px 0;padding:24px 26px;border:var(--rule);border-radius:var(--radius-12);
+    background:var(--surface-1);box-shadow:var(--inset-topline);
+  }
+  .prompt .label{
+    font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;
+    color:var(--fg-4);margin-bottom:12px;
+  }
+  .prompt p{margin:0;color:var(--fg);font-size:16.5px;line-height:1.62}
+
+  /* ---------- stat strip ---------- */
+  .stats{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;
+    background:rgba(255,255,255,0.08);border:var(--rule);border-radius:var(--radius-12);
+    overflow:hidden;margin:40px 0;
+  }
+  .stats div{background:var(--surface-1);padding:20px 22px}
+  .stats .v{font-size:27px;font-weight:510;letter-spacing:var(--tracking-display);color:var(--fg)}
+  .stats .l{font-size:12.5px;color:var(--fg-4);margin-top:4px;line-height:1.45}
+
+  /* ---------- footer ---------- */
+  footer{
+    margin-top:96px;border-top:var(--rule);
+    background:linear-gradient(rgba(255,255,255,0.015),rgba(255,255,255,0.015)),var(--bg);
+  }
+  .foot-inner{max-width:720px;margin:0 auto;padding:44px 24px 80px;
+    font-size:13px;color:var(--fg-4);line-height:1.8}
+  .foot-inner a{border-bottom-color:rgba(113,112,255,.25)}
+
+  @media (max-width:720px){
+    .top-inner{padding:72px 24px 40px}
+    main{padding-top:48px}
+    h2{margin-top:56px}
+    figure.full{margin-left:0;transform:none;padding:0}
+    .lede::first-letter{font-size:52px}
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-inner">
+    <p class="kicker">Prompt Atelier · Design study</p>
+    <h1>Read the code, not the mood board</h1>
+    <p class="standfirst">I rebuilt a brand's motion language from its own CSS instead of describing it in adjectives. Eight loops later, the interesting output wasn't the animation. It was the file.</p>
+    <div class="byline">
+      <b>Aline Cunico</b>
+      <span class="dot">·</span><span>Creative Technology &amp; Transformation</span>
+      <span class="dot">·</span><span>8 loops · 5s each · 1080×1350</span>
+    </div>
+  </div>
+</header>
+
+<main>
+<div class="shell">
+
+  <h2>The idea</h2>
+
+  <p class="lede">Ask a model to make something “in the style of a confident, modern, premium software brand” and you will get exactly that: a confident, modern, premium average of everything it has ever seen. The adjectives are the problem. They are lossy by design — a compression of an entire visual system down to four words that could describe two hundred companies.</p>
+
+  <p>But most brands publish their design system every day, in public, in a form that isn’t lossy at all. It’s called CSS.</p>
+
+  <p>So for this study I skipped the describing. I pointed a headless browser at a design-led product site, read its live stylesheets and computed styles, and turned what came back into a single style file. Then I built eight looping motion graphics that were only allowed to use values from it.</p>
+
+  <div class="stats">
+    <div><div class="v">421</div><div class="l">CSS custom properties</div></div>
+    <div><div class="v">101</div><div class="l">keyframe blocks</div></div>
+    <div><div class="v">~4,000</div><div class="l">elements sampled per page</div></div>
+    <div><div class="v">9</div><div class="l">uses of the brand colour</div></div>
+  </div>
+
+</div>
+
+<figure class="full">
+  <!-- Swap these paths for your CDN URLs when publishing -->
+  <div class="shot"><img src="../export/gif/01-dotgrid-cascade.gif" alt="01 Dot grid to cascade" loading="lazy" width="540" height="675"></div>
+  <figcaption><b>01</b>Dot grid → cascade. The stepped opacity states come straight from the source site’s own keyframes — dots cut between 0.3 and 1 with no tween.</figcaption>
+</figure>
+
+<div class="shell">
+
+  <h2>The workflow</h2>
+
+  <ol class="steps">
+    <li><b>Extract</b>Playwright and headless Chrome across three pages. Not screenshots — the actual cascade. Frequency matters as much as presence: knowing a colour exists tells you little, knowing it appears nine times in four thousand elements tells you how to use it.</li>
+    <li><b>Style file</b>Two artefacts, written once. <code>tokens.css</code> holds every measured value as a custom property. <code>brand-style.md</code> is the human version — palette, type, surfaces, depth, and a motion personality of five adjectives, each backed by the code that produced it.</li>
+    <li><b>Brief</b>The global rules. Canvas 1080×1350. Five-second seamless loop. All motion driven from a single <code>t = elapsed % 5000</code>, so frames are deterministic and recordable. No CSS animations — you can’t seek them frame-accurately.</li>
+    <li><b>Build</b>One line per animation, and the rule that did most of the work: <strong>one object, one change</strong>.</li>
+    <li><b>Export</b>Playwright calls <code>seek()</code> 150 times per piece and screenshots each frame; ffmpeg encodes to MP4 and GIF. Because the clock is the only input, take forty is identical to take one.</li>
+  </ol>
+
+  <div class="prompt">
+    <div class="label">Prompt · 06 Bar chart → build</div>
+    <p>Twelve bars rise from zero in a staggered reveal with the brand’s slowest ease, hold at full height, then fall back in reverse order — one bar, the tallest, carries the accent and a bloom behind it.</p>
+  </div>
+
+  <p>Note what that sentence doesn’t contain: no hex codes, no cubic-beziers, no durations. It refers to brand values by <em>role</em> — “the brand’s slowest ease”, “the accent”. Swap the style file for another brand’s and the same sentence produces that brand’s version. That portability is the whole point.</p>
+
+</div>
+
+<figure class="full">
+  <div class="shot"><img src="../export/gif/06-bar-chart-build.gif" alt="06 Bar chart to build" loading="lazy" width="540" height="675"></div>
+  <figcaption><b>06</b>Bar chart → build. A thousand-millisecond reveal on a curve read from the source, not chosen.</figcaption>
+</figure>
+
+<div class="shell">
+
+  <h2>What worked</h2>
+
+  <p>The frequency data. Three of the eight pieces changed shape because of it. I had assumed the brand’s indigo was a hero colour; the extraction said it appears nine times in four thousand elements. It isn’t a hero colour — it’s a <em>pointer</em>. It marks one thing at a time.</p>
+
+  <blockquote>
+    <p>Every animation in the set now carries exactly one accent element. That single constraint is most of why they look like a family.</p>
+  </blockquote>
+
+  <p>The absences were just as useful. The brand publishes eighteen easing curves and not one of them overshoots — no spring, no bounce, no elastic. You cannot see an absence on a mood board. You can see it immediately in a token file.</p>
+
+  <p>And <strong>one object, one change</strong> removed most of the decisions before I started. The pieces that needed real iteration were the two where I ignored it and had two things changing at once.</p>
+
+  <h2>What didn’t</h2>
+
+  <h3>The gradient piece was nearly a failure</h3>
+  <p>My first version was a soft violet bloom drifting over black — restrained, technically correct, and indistinguishable from every AI gradient loop on the internet. It only became <em>this</em> brand’s gradient when I put a still hairline grid in front of it. The restraint wasn’t enough. The architecture was the tell.</p>
+
+  <h3>Measured isn’t the same as composed</h3>
+  <p>The extraction gives you a palette, not a layout. Several pieces were technically correct and visually flat on the first pass, and needed brightness and scale decisions that no amount of scraping would have supplied.</p>
+
+  <h3>Type is where the substitution shows</h3>
+  <p>The source uses a licensed variable Inter at weight 510 with a custom feature set, plus a commercial monospace. Google Fonts Inter gets me the weight and the tracking exactly; the mono is a stand-in, and a trained eye would clock it.</p>
+
+</div>
+
+<figure class="full">
+  <div class="shot"><img src="../export/gif/08-card-stack-tilt.gif" alt="08 Card stack to tilt" loading="lazy" width="540" height="675"></div>
+  <figcaption><b>08</b>Card stack → tilt. Perspective and depth-of-field borrowed from the source site’s hero treatment — the plane moves three degrees and the parallax does the rest.</figcaption>
+</figure>
+
+<div class="shell">
+
+  <h2>Where this goes next</h2>
+
+  <p>For brand teams, the useful artefact isn’t the loops — it’s that <em>“is this on brand?”</em> becomes a question you can answer by reading a file rather than convening a meeting. A token file is checkable. An adjective isn’t.</p>
+
+  <p>For content teams, it’s a way to produce a lot of on-system motion quickly without a designer rebuilding the brand from memory every time. The style file is the expensive part, and you write it once.</p>
+
+  <p>The natural next step is to run the extraction against your <strong>own</strong> site and see whether the system you think you have is the system you actually ship. In my experience, that gap is where the interesting conversation starts.</p>
+
+</div>
+</main>
+
+<footer>
+  <div class="foot-inner">
+    Unofficial design study. Not affiliated with Linear. No logo, wordmark or trademarked imagery is used — colours, type feel, shapes, radii, depth and easing only. Fonts substituted with Google Fonts Inter and JetBrains Mono.<br><br>
+    Written by Aline Cunico for <a href="https://promptatelier.uk">Prompt Atelier</a>.
+  </div>
+</footer>
+
+</body>
+</html>

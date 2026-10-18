@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>02 Hairline → scan</title>
+<style>
+  /* Tokens copied verbatim from ../style/tokens.css (Linear motion study).
+     Unofficial design study. Not affiliated with Linear. */
+  :root{
+    --color-bg-marketing:#010102;
+    --color-fg-primary:#f7f8f8;
+    --color-fg-tertiary:#8a8f98;
+    --color-accent:#7170ff;
+    --color-border-translucent-strong:#ffffff14; /* 8% white — the rule */
+  }
+  html,body{margin:0;height:100%;background:var(--color-bg-marketing);overflow:hidden}
+  body{display:grid;place-items:center}
+  canvas{width:min(100vw,80vh);height:auto;display:block}
+</style>
+</head>
+<body>
+<canvas id="c" width="1080" height="1350"></canvas>
+<script>
+/* ---------- harness ---------- */
+const W = 1080, H = 1350, T = 5000;
+function bez(x1,y1,x2,y2){
+  const cx=3*x1, bx=3*(x2-x1)-cx, ax=1-cx-bx;
+  const cy=3*y1, by=3*(y2-y1)-cy, ay=1-cy-by;
+  const fx=u=>((ax*u+bx)*u+cx)*u, dfx=u=>(3*ax*u+2*bx)*u+cx;
+  return x=>{ if(x<=0)return 0; if(x>=1)return 1; let u=x;
+    for(let i=0;i<8;i++){const e=fx(u)-x; if(Math.abs(e)<1e-6)break; const d=dfx(u); if(Math.abs(d)<1e-6)break; u-=e/d;}
+    return ((ay*u+by)*u+cy)*u; };
+}
+const E = { outQuad:bez(.25,.46,.45,.94), outCubic:bez(.215,.61,.355,1) };
+const cl = (v,a=0,b=1)=>v<a?a:v>b?b:v;
+const frac = v => v - Math.floor(v);
+/* deterministic — same index, same value, every run */
+const hash = i => { const x = Math.sin(i*127.1 + 311.7) * 43758.5453; return x - Math.floor(x); };
+const ctx = document.getElementById('c').getContext('2d');
+
+/* ---------- the object: a ruled field of 1px hairlines ----------
+   Lengths vary deterministically, so it reads as rows of content
+   rather than a test pattern. One border value does all of it:
+   1px rgba(255,255,255,0.08) — 95 uses on linear.app.              */
+const TOP = 168, GAP = 24, LEFT = 132, SPAN = 816;
+const N = Math.floor((1206 - TOP) / GAP);
+const lines = Array.from({length:N}, (_,i) => {
+  const h1 = hash(i), h2 = hash(i+91.3);
+  const indent = h2 < 0.22 ? 44 : 0;                 // occasional indent
+  const w = SPAN * (0.34 + 0.62*h1) - indent;
+  return { y: TOP + i*GAP, x: LEFT + indent, w };
+});
+
+/* ---------- the change: one scan band travels down, flashing them ----------
+   Phase is position minus time, so the loop is seamless.
+   Tiers are hard cuts: the band does not fade in, it arrives.      */
+const BAND = 0.105;
+function draw(t){
+  ctx.fillStyle = '#010102';
+  ctx.fillRect(0,0,W,H);
+
+  const tn = t/T, travel = (1206 - TOP);
+
+  /* the band's own bloom, behind the lines — light, not movement */
+  const by = TOP + frac(tn)*travel;
+  for(const off of [-travel, 0]){
+    const g = ctx.createLinearGradient(0, by+off-300, 0, by+off+90);
+    g.addColorStop(0,'rgba(113,112,255,0)');
+    g.addColorStop(0.72,'rgba(113,112,255,0.085)');
+    g.addColorStop(1,'rgba(113,112,255,0)');
+    ctx.fillStyle = g; ctx.fillRect(0,0,W,H);
+  }
+
+  ctx.lineCap = 'round';
+  for(const ln of lines){
+    const p = frac((ln.y - TOP)/travel - tn);
+
+    let color, alpha, lw;
+    if (p < 0.010)      { color='#7170ff'; alpha=1.00; lw=2.6; }   // crest: the one accent
+    else if (p < 0.038) { color='#f7f8f8'; alpha=0.95; lw=2.0; }
+    else if (p < BAND)  { color='#8a8f98'; alpha=0.62; lw=1.5; }
+    else                { color='#ffffff'; alpha=0.20; lw=1.4; }   // the resting rule
+
+    ctx.globalAlpha = alpha;
+    ctx.strokeStyle = color;
+    ctx.lineWidth = lw;
+    ctx.beginPath();
+    ctx.moveTo(ln.x, ln.y + 0.5);
+    ctx.lineTo(ln.x + ln.w, ln.y + 0.5);
+    ctx.stroke();
+  }
+  ctx.globalAlpha = 1;
+
+  /* left margin rule — static architecture the scan passes through */
+  ctx.strokeStyle = 'rgba(255,255,255,0.08)';
+  ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(LEFT-28+0.5, TOP-40); ctx.lineTo(LEFT-28+0.5, 1206+16); ctx.stroke();
+
+  /* edge scrim */
+  const v = ctx.createLinearGradient(0,0,0,H);
+  v.addColorStop(0,'rgba(1,1,2,0.92)');
+  v.addColorStop(0.10,'rgba(1,1,2,0)');
+  v.addColorStop(0.90,'rgba(1,1,2,0)');
+  v.addColorStop(1,'rgba(1,1,2,0.92)');
+  ctx.fillStyle = v; ctx.fillRect(0,0,W,H);
+}
+
+window.LOOP = T;
+window.seek = ms => draw(((ms % T) + T) % T);
+if (location.search.includes('capture')) { draw(0); }
+else { const run = () => { draw(performance.now() % T); requestAnimationFrame(run); }; requestAnimationFrame(run); }
+</script>
+</body>
+</html>

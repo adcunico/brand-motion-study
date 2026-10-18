@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Episode 18 &mdash; EIGHT LOOPS FROM A STYLE FILE: a brand's motion, read from its CSS &middot; Prompt Atelier</title>
+<meta property="og:title" content="EIGHT LOOPS FROM A STYLE FILE &mdash; a brand's motion, read from its CSS">
+<meta property="og:description" content="I stopped describing brands to Claude in adjectives and started handing it their stylesheets. 421 values measured from Linear's live CSS, eight seamless loops, and an extractor you can point at any brand.">
+<meta property="og:image" content="ep18/hero.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --porcelain:#FBF8F2; --ivory:#F2ECE1; --linen:#E9E1D2;
+    --ink:#1B1813; --espresso:#26221A; --umber:#3A3428;
+    --text-ink:#211D15; --text-soft:#6B6355; --text-cream:#F6F0E4; --text-fog:#B5AC9C;
+    --gold:#C19A3D; --gold-deep:#8A6A24; --gold-bright:#DCBC69;
+    --teal:#33625C; --teal-bright:#8FC2BA; --stone:#A99D88;
+    --serif:'Fraunces',Georgia,serif; --sans:'Inter',-apple-system,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:var(--sans);background:var(--porcelain);color:var(--text-ink);line-height:1.65}
+  .wrap{max-width:1060px;margin:0 auto;padding:0 32px}
+
+  /* nav */
+  nav{display:flex;justify-content:space-between;align-items:center;padding:26px 0}
+  .wm{font-family:var(--serif);font-size:24px}
+  .wm em{font-style:italic;color:var(--gold-deep)}
+  nav .wm-link{text-decoration:none;color:var(--text-ink)}
+  nav .links{display:flex;gap:34px;align-items:center}
+  nav .links a{font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--text-soft);text-decoration:none;transition:color .25s}
+  nav .links a:hover,nav .links a.active{color:var(--gold-deep)}
+  .nav-soc{display:flex;gap:18px;align-items:center;margin-left:6px}
+  .nav-soc a{display:flex}
+  .nav-soc svg{height:19px;width:auto;fill:var(--text-soft);transition:fill .25s}
+  .nav-soc a:hover svg{fill:var(--gold-deep)}
+
+  /* hero */
+  .hero{padding:56px 0 40px;text-align:left;background:
+    radial-gradient(55% 70% at 85% 0%,rgba(193,154,61,.10),transparent 60%),
+    radial-gradient(40% 55% at 5% 30%,rgba(51,98,92,.07),transparent 60%)}
+  .kicker{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-deep);font-weight:600}
+  h1{font-family:var(--serif);font-weight:400;font-size:58px;line-height:1.12;margin:18px 0 20px;max-width:880px}
+  h1 em{font-style:italic;color:var(--gold-deep)}
+  .standfirst{font-size:19px;color:var(--text-soft);max-width:700px}
+  .meta{display:flex;gap:34px;margin-top:34px;flex-wrap:wrap}
+  .meta div{font-size:13px}
+  .meta b{display:block;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--stone);margin-bottom:3px;font-weight:600}
+
+  /* portrait film — the loops are 4:5, not 16:9 */
+  .video-portrait{margin:44px auto 0;max-width:520px;aspect-ratio:1080/1350;border-radius:26px;
+    position:relative;overflow:hidden;box-shadow:0 24px 70px rgba(20,16,8,.28);background:#010102;display:block}
+  .video-portrait video{width:100%;height:100%;object-fit:cover;display:block}
+  .figcap{font-size:12.5px;color:var(--text-soft);margin-top:12px;letter-spacing:.04em;text-align:center}
+  .figcap b{color:var(--gold-deep)}
+
+  /* sections */
+  section{padding:72px 0 8px}
+  h2{font-family:var(--serif);font-weight:400;font-size:36px;margin:8px 0 14px}
+  h2 em{font-style:italic;color:var(--gold-deep)}
+  .lede{color:var(--text-soft);max-width:660px;margin-bottom:8px}
+  .standfirst a,.body-p a{color:var(--gold-deep);text-decoration:none;border-bottom:1px solid rgba(138,106,36,.35)}
+  .standfirst a:hover,.body-p a:hover{color:var(--text-ink);border-bottom-color:var(--text-ink)}
+  .body-p{max-width:660px;margin-top:16px;color:var(--text-soft);font-size:15.5px}
+
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;margin:36px 0 10px}
+  .stat{background:#fff;border:1px solid var(--linen);border-radius:18px;padding:26px 26px 22px}
+  .stat b{font-family:var(--serif);font-weight:500;font-size:38px;display:block;color:var(--text-ink)}
+  .stat b em{font-style:italic;color:var(--gold-deep)}
+  .stat span{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--text-soft);font-weight:600}
+
+  /* compact numbered method — short form, not the full step blocks */
+  .method{counter-reset:m;margin:30px 0 0;max-width:760px}
+  .method li{counter-increment:m;list-style:none;position:relative;padding:20px 0 20px 72px;border-top:1px solid var(--linen)}
+  .method li:last-child{border-bottom:1px solid var(--linen)}
+  .method li::before{content:counter(m,decimal-leading-zero);position:absolute;left:0;top:18px;
+    font-family:var(--serif);font-style:italic;font-weight:300;font-size:34px;line-height:1;color:var(--gold-deep)}
+  .method b{display:block;font-size:16px;font-weight:600;margin-bottom:3px;color:var(--text-ink)}
+  .method span{font-size:15px;color:var(--text-soft)}
+
+  /* the repo card */
+  .repo{margin:44px 0 0;background:#fff;border:1px solid var(--linen);border-radius:22px;
+    padding:34px 36px;display:flex;justify-content:space-between;align-items:center;gap:28px;flex-wrap:wrap;
+    box-shadow:0 12px 36px rgba(20,16,8,.10)}
+  .repo h3{font-family:var(--serif);font-weight:500;font-size:26px;margin-bottom:6px}
+  .repo p{font-size:14.5px;color:var(--text-soft);max-width:520px}
+  .repo .btn{display:inline-flex;align-items:center;gap:10px;padding:14px 26px;border-radius:999px;
+    background:var(--gold-deep);color:#fff;text-decoration:none;font-size:13px;font-weight:600;
+    letter-spacing:.1em;text-transform:uppercase;transition:background .25s;white-space:nowrap}
+  .repo .btn:hover{background:var(--ink)}
+
+  .note{margin-top:44px;padding:20px 24px;border-left:3px solid var(--linen);
+    font-size:13px;color:var(--text-soft);max-width:700px}
+
+  footer{margin-top:90px;padding:70px 0;text-align:center;color:var(--text-cream);background:
+    radial-gradient(55% 70% at 50% 0%,rgba(193,154,61,.25),transparent 65%),linear-gradient(165deg,#17140F,#292216)}
+  footer .wm{font-size:38px}
+  footer .wm em{color:var(--gold-bright)}
+  footer p{font-size:13px;color:var(--text-fog);letter-spacing:.14em;margin-top:14px}
+  .socials-x{display:flex;justify-content:center;gap:22px;margin-top:28px}
+  .socials-x a svg{height:24px;width:auto;fill:var(--text-fog);transition:fill .25s}
+  .socials-x a:hover svg{fill:var(--gold-bright)}
+
+  @media(max-width:720px){
+    h1{font-size:38px}
+    h2{font-size:28px}
+    .repo{flex-direction:column;align-items:flex-start}
+  }
+</style>
+<link rel="stylesheet" href="assets/responsive.css">
+</head>
+<body>
+
+<div class="wrap">
+  <nav>
+    <a class="wm-link" href="index.html"><div class="wm">Prompt <em>Atelier</em></div></a>
+    <div class="links">
+      <a href="index.html#craft">The Craft</a>
+      <a href="index.html#cases">Case Studies</a>
+      <a href="about.html">About</a>
+      <span class="nav-soc"><a href="https://www.youtube.com/@thePromptAtelier" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a><a href="https://github.com/adcunico/prompt-atelier" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a><a href="https://www.linkedin.com/in/alinecunico/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"/></svg></a></span>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <div class="kicker">Case Study &middot; Episode 18 &middot; Brand Motion &middot; Linear</div>
+    <h1>EIGHT LOOPS FROM A STYLE FILE: <em>a brand's motion, read from its CSS</em></h1>
+    <p class="standfirst">I stopped describing brands to Claude in adjectives and started handing it their
+      stylesheets. One extraction of <a href="https://linear.app" target="_blank" rel="noopener">Linear</a>,
+      one style file, eight seamless loops &mdash; every colour, curve and duration measured from the live
+      site rather than chosen. The whole method is on GitHub, and it runs on any brand.</p>
+    <div class="meta">
+      <div><b>Output</b>8 loops &middot; 5s seamless &middot; 1080&times;1350</div>
+      <div><b>Extracted</b>421 properties &middot; 101 keyframes</div>
+      <div><b>Built with</b>Claude Code &middot; Playwright &middot; ffmpeg</div>
+      <div><b>Studied</b>linear.app &middot; unofficial</div>
+    </div>
+
+    <div class="video-portrait">
+      <video controls loop autoplay muted playsinline preload="metadata" poster="ep18/poster.jpg">
+        <source src="ep18/cover-animated.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="figcap"><b>All eight, running at once</b> &mdash; one clock drives every tile, so they stay in sync.</div>
+  </div>
+
+  <section>
+    <div class="kicker">The Premise</div>
+    <h2>Adjectives are <em>lossy</em></h2>
+    <p class="lede">Ask for something &ldquo;confident, modern, premium&rdquo; and you get a confident,
+      modern, premium average of everything the model has ever seen.</p>
+    <p class="body-p">Those four words could describe two hundred companies. But most brands publish their
+      design system every day, in public, in a form that isn't lossy at all &mdash; it's called CSS. So I
+      skipped the describing: headless browser at linear.app, read the live stylesheets and computed
+      styles, and built eight looping motion graphics that were only allowed to use what came back.</p>
+  </section>
+
+  <section>
+    <div class="kicker">The Method</div>
+    <h2>Five steps, and one rule that does most of the work</h2>
+    <ol class="method">
+      <li><b>Read the real CSS, not a screenshot</b><span>Playwright and headless Chrome across three pages &mdash; custom properties, keyframes, and the computed styles of about four thousand elements. Frequency matters as much as presence.</span></li>
+      <li><b>Write one style file</b><span>Every measured value as a token, plus a human-readable version where each claim about the brand cites the code that produced it.</span></li>
+      <li><b>Write one motion brief</b><span>Canvas, loop length, easing law. All motion driven from a single clock, so frames are deterministic and recordable.</span></li>
+      <li><b>One line per animation</b><span>One object, one change. No hex codes in the prompt &mdash; it refers to brand values by role, so the same sentence works on the next brand's style file.</span></li>
+      <li><b>Capture and encode</b><span>Playwright seeks each frame and screenshots it; ffmpeg does the rest. Take forty is identical to take one.</span></li>
+    </ol>
+
+    <div class="stats">
+      <div class="stat"><b>421</b><span>Properties read</span></div>
+      <div class="stat"><b>101</b><span>Keyframes parsed</span></div>
+      <div class="stat"><b>8</b><span>Loops built</span></div>
+      <div class="stat"><b>9<em>&times;</em></b><span>Uses of the accent</span></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="kicker">The Finding</div>
+    <h2>The number a mood board <em>can't</em> give you</h2>
+    <p class="lede">I assumed Linear's indigo was a hero colour. The extraction said it appears nine times
+      in four thousand elements.</p>
+    <p class="body-p">It isn't a hero colour &mdash; it's a pointer, and it marks one thing at a time. Every
+      loop in the set now carries exactly one accent element, and that single constraint is most of why they
+      read as a family. The absences were just as useful: Linear publishes eighteen easing curves and not
+      one of them overshoots. No spring, no bounce anywhere. You can't see an absence on a mood board.</p>
+    <p class="body-p">What didn't work is worth saying too. The gradient piece was nearly a failure &mdash;
+      restrained, technically correct, and indistinguishable from every AI gradient loop on the internet. It
+      only became <em>this</em> brand's gradient when I put a still hairline grid in front of it. Extraction
+      gives you a palette, not a composition.</p>
+
+    <div class="repo">
+      <div>
+        <h3>Run it on your own brand</h3>
+        <p>The extractor, the style file, the motion brief and all eight prompts &mdash; written so you can
+          point them at a different site and get that brand's version instead.</p>
+      </div>
+      <a class="btn" href="https://github.com/adcunico/brand-motion-study" target="_blank" rel="noopener">Get it on GitHub &rarr;</a>
+    </div>
+
+    <p class="note">Unofficial design study. Not affiliated with Linear. No logo, wordmark or trademarked
+      imagery is used anywhere in the work &mdash; colours, type feel, shapes, radii, depth and easing only.
+      Inter and JetBrains Mono substituted from Google Fonts for Linear&rsquo;s licensed Inter Variable and
+      Berkeley Mono.</p>
+  </section>
+</div>
+
+<footer>
+  <div class="wm">Prompt <em>Atelier</em></div>
+  <p>CASE STUDY &middot; EPISODE 18 &middot; NEW CASE STUDIES EVERY WEEK</p>
+  <div class="socials-x">
+    <a href="https://www.youtube.com/@thePromptAtelier" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+    <a href="https://github.com/adcunico/prompt-atelier" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+    <a href="https://www.linkedin.com/in/alinecunico/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"/></svg></a>
+  </div>
+</footer>
+
+</body>
+</html>

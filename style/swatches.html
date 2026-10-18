@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Linear Motion Study — Swatch Sheet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--color-bg-marketing);
+    color: var(--color-fg-primary);
+    font-family: var(--font-regular);
+    font-feature-settings: var(--font-settings);
+    font-size: var(--font-size-regular);
+    line-height: var(--leading-body);
+    letter-spacing: var(--tracking-body);
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: var(--space-12) var(--space-9) var(--space-13); }
+
+  header.masthead { border-bottom: var(--border-rule); padding-bottom: var(--space-9); margin-bottom: var(--space-11); }
+  h1 {
+    font-size: var(--font-size-display-1); font-weight: var(--font-weight-medium);
+    letter-spacing: var(--tracking-display); line-height: var(--leading-display);
+    margin: 0 0 var(--space-6);
+  }
+  .standfirst { color: var(--color-fg-tertiary); font-size: var(--font-size-large); max-width: 56ch; margin: 0; }
+  .meta { color: var(--color-fg-quaternary); font-family: var(--font-monospace); font-size: var(--font-size-mini); margin-top: var(--space-7); }
+
+  h2 {
+    font-size: var(--font-size-title2); font-weight: var(--font-weight-medium);
+    letter-spacing: var(--tracking-display); margin: var(--space-12) 0 var(--space-4);
+  }
+  h2:first-of-type { margin-top: var(--space-10); }
+  .note { color: var(--color-fg-tertiary); max-width: 62ch; margin: 0 0 var(--space-8); }
+  .sub { color: var(--color-fg-quaternary); font-family: var(--font-monospace); font-size: var(--font-size-micro);
+         text-transform: uppercase; letter-spacing: .08em; margin: var(--space-8) 0 var(--space-5); }
+
+  .grid { display: grid; gap: var(--space-5); grid-template-columns: repeat(auto-fill, minmax(176px, 1fr)); }
+  .sw {
+    border: var(--border-rule); border-radius: var(--radius-12);
+    background: var(--color-bg-level-1); overflow: hidden; box-shadow: var(--inset-topline);
+  }
+  .chip { height: 84px; border-bottom: var(--border-rule); }
+  .sw .label { padding: var(--space-5); }
+  .sw .name { font-size: var(--font-size-small); }
+  .sw .val { font-family: var(--font-monospace); font-size: var(--font-size-micro); color: var(--color-fg-quaternary); margin-top: 2px; }
+  .sw .use { font-size: var(--font-size-micro); color: var(--color-fg-tertiary); margin-top: var(--space-3); }
+
+  .typerow { border-bottom: var(--border-rule); padding: var(--space-7) 0; display: grid; grid-template-columns: 150px 1fr; gap: var(--space-8); align-items: baseline; }
+  .typerow .k { font-family: var(--font-monospace); font-size: var(--font-size-micro); color: var(--color-fg-quaternary); }
+
+  .surfaces { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px,1fr)); gap: var(--space-5); }
+  .surf { height: 110px; border-radius: var(--radius-8); border: var(--border-rule); display: flex; align-items: flex-end; padding: var(--space-5); font-family: var(--font-monospace); font-size: var(--font-size-micro); color: var(--color-fg-tertiary); }
+
+  .depth { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px,1fr)); gap: var(--space-8); }
+  .dcard { height: 130px; border-radius: var(--radius-12); background: var(--color-bg-level-2); display: flex; align-items: center; justify-content: center;
+           font-family: var(--font-monospace); font-size: var(--font-size-micro); color: var(--color-fg-tertiary); text-align: center; padding: var(--space-5); }
+
+  .radii { display: flex; flex-wrap: wrap; gap: var(--space-8); align-items: flex-end; }
+  .rad { width: 84px; text-align: center; }
+  .rad .box { height: 84px; background: var(--color-bg-level-3); border: var(--border-rule); margin-bottom: var(--space-3); }
+  .rad .t { font-family: var(--font-monospace); font-size: var(--font-size-micro); color: var(--color-fg-quaternary); }
+
+  .eases { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px,1fr)); gap: var(--space-5); }
+  .ease { border: var(--border-rule); border-radius: var(--radius-8); padding: var(--space-5); background: var(--color-bg-level-1); }
+  .ease .n { font-size: var(--font-size-small); display: flex; justify-content: space-between; align-items: center; gap: var(--space-4); }
+  .ease .c { font-family: var(--font-monospace); font-size: 9.5px; color: var(--color-fg-quaternary); margin-top: var(--space-2); word-break: break-all; }
+  .track { height: 3px; background: rgba(255,255,255,.06); border-radius: 999px; margin-top: var(--space-5); position: relative; }
+  .dot { position: absolute; top: 50%; width: 9px; height: 9px; border-radius: 50%; background: var(--color-accent); margin-top: -4.5px; left: 0;
+         animation: run 2.6s infinite alternate both; }
+  @keyframes run { from { left: 0 } to { left: calc(100% - 9px) } }
+  .star { font-family: var(--font-monospace); font-size: 9px; color: var(--color-accent); border: 1px solid rgba(113,112,255,.35); border-radius: var(--radius-rounded); padding: 1px 7px; white-space: nowrap; }
+
+  .speeds { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px,1fr)); gap: var(--space-5); }
+  .spd { border: var(--border-rule); border-radius: var(--radius-8); padding: var(--space-5); background: var(--color-bg-level-1); }
+  .spd .v { font-size: var(--font-size-title3); font-weight: var(--font-weight-medium); letter-spacing: var(--tracking-display); }
+  .spd .l { font-size: var(--font-size-micro); color: var(--color-fg-tertiary); margin-top: var(--space-2); }
+
+  .gradrow { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px,1fr)); gap: var(--space-5); }
+  .gr { border-radius: var(--radius-8); border: var(--border-rule); overflow: hidden; }
+  .gr .g { height: 90px; }
+  .gr .t { padding: var(--space-4) var(--space-5); font-family: var(--font-monospace); font-size: var(--font-size-micro); color: var(--color-fg-quaternary); }
+
+  .dotgrid { display: grid; grid-template-columns: repeat(14, 10px); gap: 10px; margin-top: var(--space-6); }
+  .dotgrid i { width: 4px; height: 4px; border-radius: 50%; background: var(--color-fg-tertiary); opacity: var(--dot-opacity-off);
+               animation: flip 3.2s steps(1) infinite; }
+  @keyframes flip { 0%,45% { opacity: var(--dot-opacity-off) } 50%,95% { opacity: var(--dot-opacity-on) } 100% { opacity: var(--dot-opacity-off) } }
+
+  footer { margin-top: var(--space-13); padding-top: var(--space-8); border-top: var(--border-rule); color: var(--color-fg-quaternary); font-size: var(--font-size-mini); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <h1>Linear, read from the code</h1>
+    <p class="standfirst">A design system extracted from live CSS rather than described in adjectives. Every value on this sheet was measured, not chosen.</p>
+    <p class="meta">linear.app · home, /plan, /build · 421 custom properties · 101 keyframes · ~4,000 elements sampled · 2026-10-18</p>
+  </header>
+
+  <h2>Surfaces</h2>
+  <p class="note">A five-step ladder down to black. The steps are tiny — <code>#08090a</code> to <code>#0f1011</code> is seven points of luminance. Surfaces separate by hairline and halo, not by contrast.</p>
+  <div class="surfaces">
+    <div class="surf" style="background:#010102">#010102 marketing</div>
+    <div class="surf" style="background:#08090a">#08090a level-0</div>
+    <div class="surf" style="background:#0f1011">#0f1011 level-1</div>
+    <div class="surf" style="background:#141516">#141516 level-2</div>
+    <div class="surf" style="background:#191a1b">#191a1b level-3</div>
+    <div class="surf" style="background:#1c1c1f">#1c1c1f secondary</div>
+    <div class="surf" style="background:#232326">#232326 tertiary</div>
+    <div class="surf" style="background:#28282c">#28282c quaternary</div>
+  </div>
+
+  <h2>Foreground</h2>
+  <p class="note">Four steps carry the entire hierarchy. Body text is <code>#f7f8f8</code>, not white — pure white is reserved for hover.</p>
+  <div class="grid">
+    <div class="sw"><div class="chip" style="background:#f7f8f8"></div><div class="label"><div class="name">fg-primary</div><div class="val">#f7f8f8</div><div class="use">2,612 uses · headlines, body</div></div></div>
+    <div class="sw"><div class="chip" style="background:#d0d6e0"></div><div class="label"><div class="name">fg-secondary</div><div class="val">#d0d6e0</div><div class="use">237 uses</div></div></div>
+    <div class="sw"><div class="chip" style="background:#8a8f98"></div><div class="label"><div class="name">fg-tertiary</div><div class="val">#8a8f98</div><div class="use">640 uses · subheads</div></div></div>
+    <div class="sw"><div class="chip" style="background:#62666d"></div><div class="label"><div class="name">fg-quaternary</div><div class="val">#62666d</div><div class="use">359 uses · dimmest</div></div></div>
+    <div class="sw"><div class="chip" style="background:#ffffff"></div><div class="label"><div class="name">white</div><div class="val">#ffffff</div><div class="use">115 uses · hover only</div></div></div>
+  </div>
+
+  <h2>Accent</h2>
+  <p class="note">Indigo <code>#5e6ad2</code> appeared <strong>nine times</strong> in a four-thousand-element sample. The brand colour is almost never on screen — it marks one thing at a time.</p>
+  <div class="grid">
+    <div class="sw"><div class="chip" style="background:#7170ff"></div><div class="label"><div class="name">accent</div><div class="val">#7170ff</div><div class="use">the violet</div></div></div>
+    <div class="sw"><div class="chip" style="background:#5e6ad2"></div><div class="label"><div class="name">brand-bg / indigo</div><div class="val">#5e6ad2</div><div class="use">9 uses · primary fill</div></div></div>
+    <div class="sw"><div class="chip" style="background:#828fff"></div><div class="label"><div class="name">accent-hover / link</div><div class="val">#828fff</div><div class="use">hover, links</div></div></div>
+    <div class="sw"><div class="chip" style="background:#18182f"></div><div class="label"><div class="name">accent-tint</div><div class="val">#18182f</div><div class="use">~8% over canvas</div></div></div>
+    <div class="sw"><div class="chip" style="background:#5e69d1"></div><div class="label"><div class="name">focus-ring</div><div class="val">#5e69d1</div><div class="use">1px outline + 3px halo</div></div></div>
+  </div>
+
+  <p class="sub">Product & semantic</p>
+  <div class="grid">
+    <div class="sw"><div class="chip" style="background:#68cc58"></div><div class="label"><div class="name">plan</div><div class="val">#68cc58</div></div></div>
+    <div class="sw"><div class="chip" style="background:#d4b144"></div><div class="label"><div class="name">build</div><div class="val">#d4b144</div></div></div>
+    <div class="sw"><div class="chip" style="background:#7a7fad"></div><div class="label"><div class="name">security</div><div class="val">#7a7fad</div></div></div>
+    <div class="sw"><div class="chip" style="background:#4ea7fc"></div><div class="label"><div class="name">blue</div><div class="val">#4ea7fc</div></div></div>
+    <div class="sw"><div class="chip" style="background:#27a644"></div><div class="label"><div class="name">green</div><div class="val">#27a644</div></div></div>
+    <div class="sw"><div class="chip" style="background:#00b8cc"></div><div class="label"><div class="name">teal</div><div class="val">#00b8cc</div></div></div>
+    <div class="sw"><div class="chip" style="background:#f0bf00"></div><div class="label"><div class="name">yellow</div><div class="val">#f0bf00</div></div></div>
+    <div class="sw"><div class="chip" style="background:#fc7840"></div><div class="label"><div class="name">orange</div><div class="val">#fc7840</div></div></div>
+    <div class="sw"><div class="chip" style="background:#eb5757"></div><div class="label"><div class="name">red</div><div class="val">#eb5757</div></div></div>
+  </div>
+
+  <p class="sub">Warm illustration tints — hero layers only, never UI</p>
+  <div class="grid">
+    <div class="sw"><div class="chip" style="background:#f79ce0"></div><div class="label"><div class="name">tint-pink</div><div class="val">#f79ce0</div><div class="use">41 uses</div></div></div>
+    <div class="sw"><div class="chip" style="background:#f7bf8b"></div><div class="label"><div class="name">tint-peach</div><div class="val">#f7bf8b</div><div class="use">22 uses</div></div></div>
+    <div class="sw"><div class="chip" style="background:#ffdf9f"></div><div class="label"><div class="name">tint-sand</div><div class="val">#ffdf9f</div></div></div>
+    <div class="sw"><div class="chip" style="background:#8fa6ff"></div><div class="label"><div class="name">tint-periwinkle</div><div class="val">#8fa6ff</div></div></div>
+  </div>
+
+  <h2>Gradients</h2>
+  <p class="note">Not colour ramps — low-alpha white washes over near-black. Colour enters as a 20% directional bloom at one edge of a surface.</p>
+  <div class="gradrow">
+    <div class="gr"><div class="g" style="background:#08090a; background-image:var(--grad-surface-lift)"></div><div class="t">surface-lift · white 2%</div></div>
+    <div class="gr"><div class="g" style="background:#08090a; background-image:var(--grad-surface-lift-strong)"></div><div class="t">surface-lift-strong · white 5%</div></div>
+    <div class="gr"><div class="g" style="background:#08090a; background-image:var(--grad-radial-glow)"></div><div class="t">radial-glow · white 4% → 0</div></div>
+    <div class="gr"><div class="g" style="background:#08090a; background-image:var(--grad-bloom-accent)"></div><div class="t">bloom-accent · violet 20% at edge</div></div>
+    <div class="gr"><div class="g" style="background:#08090a; background-image:var(--grad-bloom-blue)"></div><div class="t">bloom-blue</div></div>
+    <div class="gr"><div class="g" style="background-image:var(--grad-chip)"></div><div class="t">chip · #4a4a55 → #2a2a31</div></div>
+  </div>
+
+  <h2>Type</h2>
+  <p class="note">Inter at weight <strong>510</strong> — heavier than regular, lighter than semibold — with display tracking of <strong>−0.022em</strong> and leading set solid at 1.0. Substituted from Linear's licensed Inter Variable; mono stands in for Berkeley Mono.</p>
+  <div class="typerow"><div class="k">display-1 · 64px<br>510 · −0.022em · 1.0</div><div style="font-size:64px;font-weight:510;letter-spacing:-.022em;line-height:1">Plan and navigate</div></div>
+  <div class="typerow"><div class="k">display-2 · 48px<br>510 · −0.022em</div><div style="font-size:48px;font-weight:510;letter-spacing:-.022em;line-height:1;color:var(--color-fg-tertiary)">from idea to launch</div></div>
+  <div class="typerow"><div class="k">title2 · 24px · 510</div><div style="font-size:24px;font-weight:510;letter-spacing:-.022em">One object, one change</div></div>
+  <div class="typerow"><div class="k">regular · 15px<br>400 · −0.011em · 1.6</div><div style="max-width:62ch;color:var(--color-fg-tertiary)">Body text is set at fifteen pixels with a sixteen-hundredths leading and a tracking of minus eleven thousandths of an em. The tightness of the display type is what you notice; the openness of the body text is what makes it readable.</div></div>
+  <div class="typerow"><div class="k">small · 13px · 400</div><div style="font-size:13px;color:var(--color-fg-tertiary)">Secondary label, caption, metadata</div></div>
+  <div class="typerow"><div class="k">mono · 12px</div><div style="font-family:var(--font-monospace);font-size:12px;color:var(--color-fg-secondary)">--ease-out-quad: cubic-bezier(.25,.46,.45,.94)</div></div>
+  <div class="typerow"><div class="k">weights</div><div>
+    <span style="font-weight:300">300</span> &nbsp;
+    <span style="font-weight:400">400</span> &nbsp;
+    <span style="font-weight:510;color:var(--color-accent)">510</span> &nbsp;
+    <span style="font-weight:590">590</span> &nbsp;
+    <span style="font-weight:680">680</span>
+    <span style="color:var(--color-fg-quaternary);font-size:13px"> — 510 is the headline weight, used 364×</span>
+  </div></div>
+
+  <h2>Depth</h2>
+  <p class="note">The real card treatment is a <em>black halo</em>, not a drop shadow — a soft bloom the same colour as the background. Edges are built from 1px inset highlights.</p>
+  <div class="depth">
+    <div class="dcard" style="box-shadow:var(--shadow-halo)">shadow-halo<br>8.6px/12.9px + 68.6px blur</div>
+    <div class="dcard" style="box-shadow:var(--inset-hairline)">inset-hairline<br>inset 0 0 0 1px white 5%</div>
+    <div class="dcard" style="box-shadow:var(--inset-topline), var(--inset-hairline)">inset-topline + hairline<br>1px bevel from above</div>
+    <div class="dcard" style="box-shadow:var(--shadow-high)">shadow-high<br>0 7px 32px black 35%</div>
+    <div class="dcard" style="box-shadow:var(--inset-vignette)">inset-vignette<br>inset 0 0 12px black 20%</div>
+    <div class="dcard" style="box-shadow:var(--ring-focus)">ring-focus<br>0 0 0 3px indigo 40%</div>
+  </div>
+
+  <h2>Radii</h2>
+  <p class="note">Pills (110×) and 8px (72×) do nearly all the work.</p>
+  <div class="radii">
+    <div class="rad"><div class="box" style="border-radius:4px"></div><div class="t">4</div></div>
+    <div class="rad"><div class="box" style="border-radius:6px"></div><div class="t">6</div></div>
+    <div class="rad"><div class="box" style="border-radius:8px"></div><div class="t">8 · 72×</div></div>
+    <div class="rad"><div class="box" style="border-radius:12px"></div><div class="t">12</div></div>
+    <div class="rad"><div class="box" style="border-radius:16px"></div><div class="t">16</div></div>
+    <div class="rad"><div class="box" style="border-radius:24px"></div><div class="t">24</div></div>
+    <div class="rad"><div class="box" style="border-radius:32px"></div><div class="t">32</div></div>
+    <div class="rad"><div class="box" style="border-radius:9999px"></div><div class="t">pill · 110×</div></div>
+  </div>
+
+  <h2>Motion — duration</h2>
+  <p class="note">Two speeds with nothing in between: UI reacts at 100–160ms, scenes narrate at 700ms.</p>
+  <div class="speeds">
+    <div class="spd"><div class="v">100ms</div><div class="l">quickTransition · 289 uses</div></div>
+    <div class="spd"><div class="v">150ms</div><div class="l">highlightFadeOut</div></div>
+    <div class="spd"><div class="v">160ms</div><div class="l">transform / filter default</div></div>
+    <div class="spd"><div class="v">200ms</div><div class="l">filter</div></div>
+    <div class="spd"><div class="v">250ms</div><div class="l">regularTransition</div></div>
+    <div class="spd"><div class="v">700ms</div><div class="l">scene & hero moves</div></div>
+    <div class="spd"><div class="v">1000ms</div><div class="l">long opacity reveals</div></div>
+  </div>
+
+  <h2>Motion — easing</h2>
+  <p class="note">The published set runs quad → circ. Note what is missing: no back, no elastic, no spring. Nothing in this brand overshoots.</p>
+  <div class="eases">
+    <div class="ease"><div class="n"><span>ease-out-quad</span><span class="star">workhorse · 187×</span></div><div class="c">cubic-bezier(.25,.46,.45,.94)</div><div class="track"><span class="dot" style="animation-timing-function:var(--ease-out-quad)"></span></div></div>
+    <div class="ease"><div class="n"><span>ease-in-out-cubic</span><span class="star">scene · 0.7s</span></div><div class="c">cubic-bezier(.645,.045,.355,1)</div><div class="track"><span class="dot" style="animation-timing-function:var(--ease-in-out-cubic)"></span></div></div>
+    <div class="ease"><div class="n"><span>ease-snap</span><span class="star">unlisted · observed</span></div><div class="c">cubic-bezier(.32,.72,0,1)</div><div class="track"><span class="dot" style="animation-timing-function:var(--ease-snap)"></span></div></div>
+    <div class="ease"><div class="n"><span>ease-out-cubic</span></div><div class="c">cubic-bezier(.215,.61,.355,1)</div><div class="track"><span class="dot" style="animation-timing-function:var(--ease-out-cubic)"></span></div></div>
+    <div class="ease"><div class="n"><span>ease-out-quart</span></div><div class="c">cubic-bezier(.165,.84,.44,1)</div><div class="track"><span class="dot" style="animation-timing-function:var(--ease-out-quart)"></span></div></div>
+    <div class="ease"><div class="n"><span>ease-out-quint</span></div><div class="c">cubic-bezier(.23,1,.32,1)</div><div class="track"><span class="dot" style="animation-timing-function:var(--ease-out-quint)"></span></div></div>
+    <div class="ease"><div class="n"><span>ease-out-expo</span></div><div class="c">cubic-bezier(.19,1,.22,1)</div><div class="track"><span class="dot" style="animation-timing-function:var(--ease-out-expo)"></span></div></div>
+    <div class="ease"><div class="n"><span>ease-out-circ</span></div><div class="c">cubic-bezier(.075,.82,.165,1)</div><div class="track"><span class="dot" style="animation-timing-function:var(--ease-out-circ)"></span></div></div>
+    <div class="ease"><div class="n"><span>ease-in-out-quart</span></div><div class="c">cubic-bezier(.77,0,.175,1)</div><div class="track"><span class="dot" style="animation-timing-function:var(--ease-in-out-quart)"></span></div></div>
+    <div class="ease"><div class="n"><span>ease-in-out-expo</span></div><div class="c">cubic-bezier(1,0,0,1)</div><div class="track"><span class="dot" style="animation-timing-function:var(--ease-in-out-expo)"></span></div></div>
+    <div class="ease"><div class="n"><span>ease-in-out-circ</span></div><div class="c">cubic-bezier(.785,.135,.15,.86)</div><div class="track"><span class="dot" style="animation-timing-function:var(--ease-in-out-circ)"></span></div></div>
+    <div class="ease"><div class="n"><span>ease-in-quad</span></div><div class="c">cubic-bezier(.55,.085,.68,.53)</div><div class="track"><span class="dot" style="animation-timing-function:var(--ease-in-quad)"></span></div></div>
+  </div>
+
+  <h2>Motion — stepped states</h2>
+  <p class="note">Linear's dot grid toggles opacity between exactly <code>0.3</code> and <code>1</code> using duplicated keyframe stops — hard state change, no tween. Things flip on, like data arriving.</p>
+  <div class="dotgrid">
+    <script>
+      document.write(Array.from({length: 70}, (_, i) =>
+        `<i style="animation-delay:${((i * 137) % 3200)}ms"></i>`).join(''));
+    </script>
+  </div>
+
+  <footer>
+    Unofficial design study by Aline Cunico. Not affiliated with Linear. No logo, wordmark or trademarked imagery is used.<br>
+    Values extracted from linear.app on 2026-10-18 · fonts substituted with Google Fonts Inter and JetBrains Mono.
+  </footer>
+
+</div>
+</body>
+</html>

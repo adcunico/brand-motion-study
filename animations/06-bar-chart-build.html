@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>06 Bar chart → build</title>
+<style>
+  /* Tokens copied verbatim from ../style/tokens.css (Linear motion study).
+     Unofficial design study. Not affiliated with Linear. */
+  :root{
+    --color-bg-marketing:#010102;
+    --color-bg-level-3:#191a1b;
+    --color-bg-quaternary:#28282c;
+    --color-fg-quaternary:#62666d;
+    --color-accent:#7170ff;
+  }
+  html,body{margin:0;height:100%;background:var(--color-bg-marketing);overflow:hidden}
+  body{display:grid;place-items:center}
+  canvas{width:min(100vw,80vh);height:auto;display:block}
+</style>
+</head>
+<body>
+<canvas id="c" width="1080" height="1350"></canvas>
+<script>
+/* ---------- harness ---------- */
+const W = 1080, H = 1350, T = 5000;
+function bez(x1,y1,x2,y2){
+  const cx=3*x1, bx=3*(x2-x1)-cx, ax=1-cx-bx;
+  const cy=3*y1, by=3*(y2-y1)-cy, ay=1-cy-by;
+  const fx=u=>((ax*u+bx)*u+cx)*u, dfx=u=>(3*ax*u+2*bx)*u+cx;
+  return x=>{ if(x<=0)return 0; if(x>=1)return 1; let u=x;
+    for(let i=0;i<8;i++){const e=fx(u)-x; if(Math.abs(e)<1e-6)break; const d=dfx(u); if(Math.abs(d)<1e-6)break; u-=e/d;}
+    return ((ay*u+by)*u+cy)*u; };
+}
+const E = { outQuint:bez(.23,1,.32,1), inOutCubic:bez(.645,.045,.355,1), outQuad:bez(.25,.46,.45,.94) };
+const cl = (v,a=0,b=1)=>v<a?a:v>b?b:v;
+const seg = (t,a,b)=>cl((t-a)/(b-a));
+const hash = i => { const x = Math.sin(i*127.1 + 311.7) * 43758.5453; return x - Math.floor(x); };
+const ctx = document.getElementById('c').getContext('2d');
+
+function roundRect(x,y,w,h,r){
+  r = Math.min(r, w/2, h/2);
+  ctx.beginPath();
+  ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r);
+  ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath();
+}
+
+/* ---------- the object: twelve bars ---------- */
+const N = 12, BW = 48, BGAP = 24;
+const CHART_W = N*BW + (N-1)*BGAP;              /* 840 */
+const X0 = (W - CHART_W)/2;                     /* 120 */
+const BASE = 1004, MAXH = 600;                  /* top at 404 — square-safe */
+
+/* deterministic heights with a rising trend, like a velocity chart */
+const bars = Array.from({length:N}, (_,i) => {
+  const trend = 0.34 + 0.50*(i/(N-1));
+  const jitter = (hash(i*5.1) - 0.5) * 0.30;
+  return cl(trend + jitter, 0.18, 1);
+});
+const PEAK = bars.indexOf(Math.max(...bars));   /* the one accent */
+
+/* ---------- the change: height ----------
+   Staggered 1000ms reveal on --ease-out-quint, hold, then a 700ms
+   fall on --ease-in-out-cubic. Zero at t=0 and t=T, so it closes.  */
+const RISE_T0 = 200, RISE_STAGGER = 55, RISE_DUR = 1000;
+const FALL_T0 = 3000, FALL_DUR = 700;
+function barProgress(i, t){
+  const a = RISE_T0 + i*RISE_STAGGER;
+  const rise = E.outQuint(seg(t, a, a + RISE_DUR));
+  const b = FALL_T0 + (N-1-i)*RISE_STAGGER;
+  const fall = E.inOutCubic(seg(t, b, b + FALL_DUR));
+  return rise * (1 - fall);
+}
+
+function draw(t){
+  ctx.fillStyle = '#010102';
+  ctx.fillRect(0,0,W,H);
+
+  /* ambient lift under the chart */
+  const g = ctx.createRadialGradient(W/2, 760, 0, W/2, 760, 700);
+  g.addColorStop(0,'rgba(255,255,255,0.035)');
+  g.addColorStop(1,'rgba(255,255,255,0)');
+  ctx.fillStyle = g; ctx.fillRect(0,0,W,H);
+
+  /* gridlines — static architecture at 8% white, 4px grid */
+  ctx.lineWidth = 1;
+  for(let k=1;k<=4;k++){
+    const y = BASE - (MAXH/4)*k;
+    ctx.strokeStyle = 'rgba(255,255,255,0.045)';
+    ctx.beginPath(); ctx.moveTo(X0-36, y+0.5); ctx.lineTo(X0+CHART_W+36, y+0.5); ctx.stroke();
+  }
+
+  /* bars */
+  for(let i=0;i<N;i++){
+    const p = barProgress(i, t);
+    const h = bars[i] * MAXH * p;
+    const x = X0 + i*(BW+BGAP);
+    const y = BASE - h;
+    const isPeak = i === PEAK;
+
+    /* resting socket — the bar's track, always visible */
+    ctx.fillStyle = 'rgba(255,255,255,0.028)';
+    roundRect(x, BASE - bars[i]*MAXH, BW, bars[i]*MAXH, 8); ctx.fill();
+
+    if (h < 1) continue;
+
+    if (isPeak){
+      /* the one accent: a vertical bloom inside the bar */
+      const bg = ctx.createLinearGradient(0, y, 0, BASE);
+      bg.addColorStop(0, 'rgba(113,112,255,0.95)');
+      bg.addColorStop(1, 'rgba(94,106,210,0.55)');
+      ctx.fillStyle = bg;
+    } else {
+      const bg = ctx.createLinearGradient(0, y, 0, BASE);
+      bg.addColorStop(0, '#28282c');
+      bg.addColorStop(1, '#191a1b');
+      ctx.fillStyle = bg;
+    }
+    roundRect(x, y, BW, h, 8); ctx.fill();
+
+    /* --inset-topline: 1px highlight on the cap */
+    ctx.strokeStyle = isPeak ? 'rgba(255,255,255,0.28)' : 'rgba(255,255,255,0.07)';
+    ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(x+8, y+0.5); ctx.lineTo(x+BW-8, y+0.5); ctx.stroke();
+
+    /* --inset-hairline around the whole bar */
+    ctx.strokeStyle = 'rgba(255,255,255,0.05)';
+    roundRect(x+0.5, y+0.5, BW-1, h-1, 8); ctx.stroke();
+  }
+
+  /* accent bloom behind the peak, tied to its own progress */
+  const pk = barProgress(PEAK, t);
+  if (pk > 0.01){
+    const px = X0 + PEAK*(BW+BGAP) + BW/2;
+    const py = BASE - bars[PEAK]*MAXH*pk;
+    const bl = ctx.createRadialGradient(px,py,0,px,py,340);
+    bl.addColorStop(0, `rgba(113,112,255,${0.17*pk})`);
+    bl.addColorStop(1, 'rgba(113,112,255,0)');
+    ctx.fillStyle = bl; ctx.fillRect(0,0,W,H);
+  }
+
+  /* baseline — the one firm rule in the frame */
+  ctx.strokeStyle = 'rgba(255,255,255,0.14)';
+  ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(X0-36, BASE+0.5); ctx.lineTo(X0+CHART_W+36, BASE+0.5); ctx.stroke();
+
+  /* edge scrim */
+  const v = ctx.createLinearGradient(0,0,0,H);
+  v.addColorStop(0,'rgba(1,1,2,0.92)');
+  v.addColorStop(0.22,'rgba(1,1,2,0)');
+  v.addColorStop(0.86,'rgba(1,1,2,0)');
+  v.addColorStop(1,'rgba(1,1,2,0.92)');
+  ctx.fillStyle = v; ctx.fillRect(0,0,W,H);
+}
+
+window.LOOP = T;
+window.seek = ms => draw(((ms % T) + T) % T);
+if (location.search.includes('capture')) { draw(0); }
+else { const run = () => { draw(performance.now() % T); requestAnimationFrame(run); }; requestAnimationFrame(run); }
+</script>
+</body>
+</html>

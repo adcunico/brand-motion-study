@@ -1,0 +1,30 @@
+node_modules/
+
+# Rendered output — regenerate with `node tools/export.mjs`.
+# Kept out of the repo so a clone stays small; the method is the deliverable.
+export/mp4/
+export/gif/
+export/stills/
+export/reel.mp4
+export/cover-animated.mp4
+
+# Raw extraction dumps — regenerate with `node tools/extract.mjs`.
+# all-stylesheets.css is ~MBs of third-party CSS and is not ours to redistribute.
+style/raw/all-stylesheets.css
+style/raw/*-inline.css
+
+# Full-page reference screenshots of someone else's site
+reference/*-full.png
+
+# Local scratch
+site/_ref-*.html
+
+# Third-party screenshots — not ours to republish.
+# reference/format-reference-linkedin.png is another creator's post, including
+# their photo and name; the linear.app captures are someone else's site.
+# They stay local; the measured evidence lives in style/raw/digest.txt.
+reference/
+
+# Unpublished personal drafts — social copy and posting strategy.
+copy/linkedin-post.md
+copy/posting-guide.md
